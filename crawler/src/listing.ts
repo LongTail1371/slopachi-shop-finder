@@ -34,7 +34,7 @@ export function parseListing(html: string): { entries: ListingEntry[]; nextUrl: 
     // 'スロぱちガール来店PS ピーアーク草加' → 種別は元 HTML で &nbsp;&nbsp; 区切り。cleanText 後は最後の空白で分ける
     const rawLink = (a.html() ?? '').replace(/<svg[\s\S]*?<\/svg>/g, '');
     const parts = rawLink
-      .split(/(?:&nbsp;| )+/)
+      .split(/(?:&nbsp;|\u00A0)+/)
       .map((s) => cleanText(s.replace(/<[^>]+>/g, '')))
       .filter((s) => s.length > 0);
     const coverageType = parts[0] ?? linkText;
