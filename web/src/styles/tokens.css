@@ -1,0 +1,41 @@
+:root {
+  color-scheme: light dark;
+  --bg: #eef0f3;
+  --surface: #ffffff;
+  --ink: #1c2230;
+  --ink-soft: #5b6270;
+  --rule: #c9cdd4;
+  --plus: #e03a2f;
+  --minus: #2e6fd1;
+  --sign: #f5c400;
+  --sign-ink: #1c2230;
+  --font-display: 'Dela Gothic One', 'BIZ UDPGothic', sans-serif;
+  --font-body: 'BIZ UDPGothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --measure: 880px;
+  --space: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --surface: #1e232b;
+    --ink: #e9ecf1;
+    --ink-soft: #a5acb8;
+    --rule: #3a414c;
+  }
+}
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  font-feature-settings: 'palt';
+}
+* { box-sizing: border-box; }
+:focus-visible { outline: 3px solid var(--sign); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
