@@ -104,6 +104,8 @@
 | `article-girlps-2026-09-13.html` | スロぱちガール来店PS。ピーアーク草加（埼玉県 草加市）。スロット形式 B（9 群）＋パチンコ「＜列①＞」接頭辞あり |
 | `article-station-2026-09-11.html` | スロパチステーション来店取材。ピーアーク草加。スロット形式 B のみ、2 機種混在見出しが 2 群、パチンコ無し |
 | `listing-kita-kanto-p1.html` | 北関東一覧 1 ページ目。40 行中 17 行にリンク、うち 2 行は「(予定)」付きリンク。`a.next` あり |
+| `article-akamaru-2026-09-11.html` | 東京あかまる来店取材。スロット形式 C（h4 見出し＋縦持ち表、台番なし）17 群。Task 20 で追加 |
+| `article-station-nopref-2026-09-10.html` | スロパチステーション来店取材。店舗情報表に地域行が無い。パチンコ 2 機種。Task 20 で追加 |
 
 ## ファイル構成
 
@@ -2177,6 +2179,164 @@ git commit -m "feat: 差分クロールの制御と実行エントリを追加"
 
 ---
 
+### Task 20: 実記事で見つかった形式への対応（スロット形式 C・地域行なし・typecheck）
+
+Task 13 の実クロール（5 件）で 4 件が解析失敗した。原因は 2 つの未対応形式と、`crawler/test/fetch.test.ts` の型エラー。フィクスチャ 2 本を追加済み。
+
+| ファイル | 内容 |
+|---|---|
+| `crawler/test/fixtures/article-akamaru-2026-09-11.html` | 東京あかまる来店取材。マルハンメガシティ2000蒲田1（東京都 大田区）。**スロット形式 C**: `<div><h4>【機種名】</h4><p><img></p><table>プラス台…平均差枚数…</table></div>` が 17 群。台番は無い。パチンコ無し。div 内に DMM の機種リンクがあるが、スロットのキーには使わない |
+| `crawler/test/fixtures/article-station-nopref-2026-09-10.html` | スロパチステーション来店取材。エクス・アリーナ 東京。店舗情報表に **「地域:」行が無い**（店舗 / 訪問日 / 設置台数 / 営業時間のみ）。都道府県は直後の `<h2>9月10日 エクス・アリーナ 東京(東京都)</h2>` の末尾括弧にある。パチンコ 2 機種（東京喰種 dmm:4782 全30台中21台 +8,760玉、牙狼12黄金騎士極限 dmm:4846 全30台中10台 -3,250玉）。各セクションの外に `<pre>10時00分:30台中、11台（37%）</pre>` のような稼働データ pre が続くが、これは機種セクションの div の外なので無視される |
+
+**Files:**
+- Modify: `crawler/src/parse/slot.ts`（`parseGroupHeadings` を h2 と h4 の両方に対応）
+- Modify: `crawler/src/parse/storeInfo.ts`（地域行が無いとき最初の h2 の括弧から都道府県を取る）
+- Modify: `crawler/test/fetch.test.ts:14`（型エラーの修正）
+- Test: `crawler/test/slot.test.ts`, `crawler/test/storeInfo.test.ts`, `crawler/test/article.test.ts`（追記）
+
+**Interfaces:**
+- Consumes: 既存の `parseSlot`, `parseStoreInfo`, `parseArticle`, `loadBody`, `fixture`
+- Produces: 公開シグネチャは変えない。挙動のみ拡張
+
+- [ ] **Step 1: 失敗するテストを追記する**
+
+`crawler/test/storeInfo.test.ts` に追加:
+```ts
+  it('地域行が無い記事は最初の h2 の括弧から都道府県を取り、市区は空', () => {
+    const { body } = loadBody(fixture('article-station-nopref-2026-09-10.html'));
+    expect(parseStoreInfo(body)).toEqual({
+      store: { name: 'エクス・アリーナ 東京', prefecture: '東京都', city: '' },
+      visitDate: '2026-09-10',
+    });
+  });
+```
+
+`crawler/test/slot.test.ts` に追加:
+```ts
+describe('parseSlot 形式 C（h4 見出し + 縦持ち表、台番なし）', () => {
+  const { body } = loadBody(fixture('article-akamaru-2026-09-11.html'));
+  const r = parseSlot(body);
+
+  it('17 機種を読む', () => {
+    expect(r).toHaveLength(17);
+  });
+  it('先頭は炎炎ノ消防隊2。台番も shared も付かない', () => {
+    expect(r[0]).toEqual({
+      category: 'slot',
+      machineKey: 'name:炎炎ノ消防隊2',
+      machineName: '炎炎ノ消防隊2',
+      units: 5,
+      plusUnits: 5,
+      avgDiff: 5510,
+    });
+  });
+  it('負の平均も読む', () => {
+    expect(r.find((x) => x.machineName === '甲鉄城のカバネリ 海門決戦')).toMatchObject({ units: 16, plusUnits: 5, avgDiff: -140 });
+  });
+  it('DMM リンクがあってもスロットのキーは name: のまま', () => {
+    expect(r.every((x) => x.machineKey.startsWith('name:'))).toBe(true);
+  });
+});
+```
+
+`crawler/test/pachinko.test.ts` に追加:
+```ts
+  it('h4 の直後が表（スロット形式 C）の記事ではパチンコ結果を出さない', () => {
+    const { body } = loadBody(fixture('article-akamaru-2026-09-11.html'));
+    expect(parsePachinko(body)).toEqual([]);
+  });
+```
+
+`crawler/test/article.test.ts` に追加:
+```ts
+  it('地域行なし記事: パチンコ 2 機種を読み、都道府県は h2 から補う', () => {
+    const r = parseArticle(fixture('article-station-nopref-2026-09-10.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.store).toEqual({ name: 'エクス・アリーナ 東京', prefecture: '東京都', city: '' });
+    expect(r.article.coverageType).toBe('スロパチステーション来店取材');
+    expect(r.article.results).toHaveLength(2);
+    expect(r.article.results[0]).toEqual({
+      category: 'pachinko', machineKey: 'dmm:4782', machineName: '東京喰種', units: 30, plusUnits: 21, avgDiff: 8760,
+    });
+    expect(r.article.results[1]).toMatchObject({ machineKey: 'dmm:4846', avgDiff: -3250, plusUnits: 10 });
+  });
+
+  it('あかまる記事: スロット形式 C を 17 件読む', () => {
+    const r = parseArticle(fixture('article-akamaru-2026-09-11.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.coverageType).toBe('東京あかまる来店取材');
+    expect(r.article.store).toEqual({ name: 'マルハンメガシティ2000蒲田1', prefecture: '東京都', city: '大田区' });
+    expect(r.article.results).toHaveLength(17);
+    expect(r.article.results.every((x) => x.category === 'slot')).toBe(true);
+  });
+```
+
+- [ ] **Step 2: 失敗を確認する**
+
+Run: `pnpm --filter crawler test -- storeInfo slot pachinko article`
+Expected: 新規テストが FAIL（storeInfo は null、slot は 0 件、article は ok:false）
+
+- [ ] **Step 3: slot.ts を修正する**
+
+`parseGroupHeadings` の見出し探索を `h2` から `h2, h4` に広げ、表の帰属判定も同じセレクタにする。変更箇所は 2 行:
+
+```ts
+  body.find('h2, h4').each((_, headingEl) => {
+    const heading = body.find(headingEl);
+    ...
+    if (table.prevAll('h2, h4').first()[0] !== headingEl) return; // 別の見出しの表
+```
+
+変数名 `h2`/`h2El` は `heading`/`headingEl` に改名する。パチンコ用の `<h4>` は同じ div に `<table>` が無い（`<pre>` がある）ので、`nextAll('table')` が空になり形式 C の対象外になる。逆に形式 C の `<h4>` は `parsePachinko` 側で `<pre>` が無いため無視される。スロットのキーは `machineKeyFor(name, null)` のまま（DMM リンクは使わない）。
+
+- [ ] **Step 4: storeInfo.ts を修正する**
+
+`地域` が無い場合のフォールバックを追加する。既存の `fields` 解析の後に:
+
+```ts
+const HEADING_PREF_RE = /[（(]\s*([^（）()]*?(?:都|道|府|県))\s*[)）]\s*$/;
+
+function prefectureFromHeading(body: Cheerio<Element>): string | null {
+  const h2 = cleanText(body.find('h2').first().text());
+  return h2.match(HEADING_PREF_RE)?.[1] ?? null;
+}
+```
+
+そして `area` が無いときは `prefectureFromHeading(body)` を使い、取れれば `{ prefecture, city: '' }`、取れなければ `null` を返す。`area` があるときの挙動（`PREF_RE` で分割）は変えない。
+
+- [ ] **Step 5: fetch.test.ts の型エラーを直す**
+
+`crawler/test/fetch.test.ts:14` 付近の
+```ts
+    const init = fetchFn.mock.calls[0]![1] as RequestInit;
+```
+を
+```ts
+    const init = (fetchFn.mock.calls[0] as unknown as [string, RequestInit])[1];
+```
+に置き換える。`pnpm --filter crawler typecheck` が通ることを確認する。
+
+- [ ] **Step 6: 通ることを確認する**
+
+Run: `pnpm --filter crawler test && pnpm --filter crawler typecheck`
+Expected: 全テスト PASS、型エラー 0
+
+- [ ] **Step 7: 実サイトで再確認する**
+
+Run: `cd /Users/kohei/Developer/パチンコ系 && rm -f data/articles.json data/machines.json data/errors.json && MAX_NEW_ARTICLES=8 pnpm crawl | tail -5 && cat data/errors.json`
+Expected: `errors.json` が `[]`、または残る失敗が「(予定)」や結果未掲載など正当な理由のみ。新たな未対応形式が出たら、その記事を HTML で保存してフィクスチャにし、このタスクと同じ手順でテスト → 修正を追加する（形式が 3 つ以上増える場合は止めて報告する）。
+
+- [ ] **Step 8: コミット（生成データは含めない）**
+
+```bash
+git add crawler/src/parse/slot.ts crawler/src/parse/storeInfo.ts crawler/test
+git commit -m "fix: スロット形式 C と地域行なしの店舗情報に対応し、fetch テストの型を修正"
+```
+
+---
+
 ### Task 14: Web パッケージの土台とデザイントークン
 
 **Files:**
@@ -3511,6 +3671,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm test
+
+      - run: pnpm --filter crawler typecheck
 
       - name: クロール（push 起動時は行わない）
         if: github.event_name != 'push'
