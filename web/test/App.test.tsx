@@ -83,6 +83,43 @@ describe('App', () => {
     expect(await screen.findByText('データを読み込めませんでした。ページを再読み込みしてください。')).toBeInTheDocument();
   });
 
+  it('機種を選ぶと履歴が積まれ、戻ると一覧表示に戻る', async () => {
+    mockFetch();
+    const pushSpy = vi.spyOn(window.history, 'pushState');
+    render(<App />);
+    expect(await screen.findByRole('option', { name: /真・北斗無双 第5章/ })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('option', { name: /真・北斗無双 第5章/ }));
+    expect(screen.getByRole('heading', { level: 2, name: '真・北斗無双 第5章' })).toBeInTheDocument();
+    expect(pushSpy).toHaveBeenCalled();
+
+    // ブラウザの戻る操作をシミュレートする
+    window.history.pushState(null, '', '/');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+
+    await waitFor(() => expect(screen.queryByRole('heading', { level: 2, name: '真・北斗無双 第5章' })).not.toBeInTheDocument());
+    expect(await screen.findByRole('option', { name: /真・北斗無双 第5章/ })).toBeInTheDocument();
+  });
+
+  it('表示切替も履歴に積まれる', async () => {
+    mockFetch();
+    render(<App />);
+    await screen.findByRole('option', { name: /真・北斗無双 第5章/ });
+    const pushSpy = vi.spyOn(window.history, 'pushState');
+    await userEvent.click(screen.getByRole('button', { name: '店舗から探す' }));
+    expect(pushSpy).toHaveBeenCalled();
+  });
+
+  it('絞り込みは履歴を汚さない（replaceState のみ）', async () => {
+    mockFetch();
+    window.history.replaceState(null, '', '/?m=dmm%3A1');
+    render(<App />);
+    await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
+    const pushSpy = vi.spyOn(window.history, 'pushState');
+    await userEvent.click(screen.getByRole('checkbox', { name: '千葉県' }));
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
+    expect(pushSpy).not.toHaveBeenCalled();
+  });
+
   it('更新日時と出典を出す', async () => {
     mockFetch();
     render(<App />);

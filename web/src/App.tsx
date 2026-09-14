@@ -28,17 +28,21 @@ function useMachinesFile(): Load {
   return load;
 }
 
-function useUrlState(): [AppState, (next: AppState) => void] {
+type HistoryMode = 'push' | 'replace';
+
+function useUrlState(): [AppState, (next: AppState, mode?: HistoryMode) => void] {
   const [state, setState] = useState<AppState>(() => parseState(window.location.search));
   useEffect(() => {
     const onPop = () => setState(parseState(window.location.search));
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
-  const update = (next: AppState) => {
+  const update = (next: AppState, mode: HistoryMode = 'replace') => {
     setState(next);
     const q = serializeState(next);
-    window.history.replaceState(null, '', `${window.location.pathname}${q}`);
+    const url = `${window.location.pathname}${q}`;
+    if (mode === 'push') window.history.pushState(null, '', url);
+    else window.history.replaceState(null, '', url);
   };
   return [state, update];
 }
@@ -49,6 +53,10 @@ export function App() {
   const [query, setQuery] = useState('');
   const [openShop, setOpenShop] = useState<string | null>(null);
 
+  useEffect(() => {
+    setOpenShop(null);
+  }, [state.machineKey, state.category, state.view]);
+
   const machines = load.status === 'ready' ? load.data.machines : [];
   const machine = useMemo(() => machines.find((m) => m.machineKey === state.machineKey) ?? null, [machines, state.machineKey]);
   const options = useMemo(() => (machine ? availableFilters(machine) : { prefectures: [], coverageTypes: [] }), [machine]);
@@ -57,8 +65,7 @@ export function App() {
 
   const selectMachine = (machineKey: string) => {
     const target = machines.find((m) => m.machineKey === machineKey);
-    setOpenShop(null);
-    setState({ ...state, view: 'machine', category: target?.category ?? state.category, machineKey, prefectures: [], coverageTypes: [] });
+    setState({ ...state, view: 'machine', category: target?.category ?? state.category, machineKey, prefectures: [], coverageTypes: [] }, 'push');
   };
 
   return (
@@ -66,10 +73,10 @@ export function App() {
       <header className="top">
         <h1>スロパチ取材 店さがし</h1>
         <nav className="top-nav" aria-label="表示">
-          <CategoryToggle value={state.category} onChange={(c) => { setQuery(''); setOpenShop(null); setState({ ...state, category: c, machineKey: null, prefectures: [], coverageTypes: [] }); }} />
+          <CategoryToggle value={state.category} onChange={(c) => { setQuery(''); setState({ ...state, category: c, machineKey: null, prefectures: [], coverageTypes: [] }); }} />
           {state.view === 'machine'
-            ? <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'store' })}>店舗から探す</button>
-            : <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'machine', storeQuery: '' })}>機種から探す</button>}
+            ? <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'store' }, 'push')}>店舗から探す</button>
+            : <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'machine', storeQuery: '' }, 'push')}>機種から探す</button>}
         </nav>
       </header>
 
