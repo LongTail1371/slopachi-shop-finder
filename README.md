@@ -2,6 +2,8 @@
 
 スロパチステーションの取材結果（関東 3 エリア、直近 90 日）から、機種を選ぶとピックアップ回数の多い店舗が並ぶ私的な検索サイト。
 
+公開 URL: https://longtail1371.github.io/slopachi-shop-finder/ （リポジトリ: https://github.com/LongTail1371/slopachi-shop-finder ）
+
 ## 構成
 
 - `crawler/` 記事の差分取得と集計（Node + TypeScript）
