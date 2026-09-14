@@ -52,4 +52,15 @@ describe('createFetcher', () => {
     await expect(f('https://a.test/')).rejects.toThrow('(404)');
     expect(fetchFn).toHaveBeenCalledTimes(1);
   });
+
+  it('ネットワーク例外は再試行し、成功すれば本文を返す', async () => {
+    const fetchFn = vi.fn()
+      .mockRejectedValueOnce(new Error('ECONNRESET'))
+      .mockResolvedValueOnce(res(200, 'recovered'));
+    const sleep = vi.fn(async () => {});
+    const f = createFetcher({ fetchFn, sleep, now: () => 0 });
+    await expect(f('https://a.test/')).resolves.toBe('recovered');
+    expect(fetchFn).toHaveBeenCalledTimes(2);
+    expect(sleep).toHaveBeenCalledWith(1000);
+  });
 });
