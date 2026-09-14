@@ -28,4 +28,11 @@ describe('parseStoreInfo', () => {
     );
     expect(parseStoreInfo(body)?.store).toEqual({ name: 'X店', prefecture: '東京都', city: '豊島区' });
   });
+  it('地域行が無い記事は最初の h2 の括弧から都道府県を取り、市区は空', () => {
+    const { body } = loadBody(fixture('article-station-nopref-2026-09-10.html'));
+    expect(parseStoreInfo(body)).toEqual({
+      store: { name: 'エクス・アリーナ 東京', prefecture: '東京都', city: '' },
+      visitDate: '2026-09-10',
+    });
+  });
 });

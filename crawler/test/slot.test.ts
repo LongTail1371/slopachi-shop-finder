@@ -69,3 +69,28 @@ describe('parseSlot 形式 B（機種見出し + 縦持ち表）', () => {
     expect(r.find((x) => x.machineName === 'かぐや様')).toMatchObject({ units: 3, plusUnits: 2, avgDiff: 190, shared: true });
   });
 });
+
+describe('parseSlot 形式 C（h4 見出し + 縦持ち表、台番なし）', () => {
+  const { body } = loadBody(fixture('article-akamaru-2026-09-11.html'));
+  const r = parseSlot(body);
+
+  it('17 機種を読む', () => {
+    expect(r).toHaveLength(17);
+  });
+  it('先頭は炎炎ノ消防隊2。台番も shared も付かない', () => {
+    expect(r[0]).toEqual({
+      category: 'slot',
+      machineKey: 'name:炎炎ノ消防隊2',
+      machineName: '炎炎ノ消防隊2',
+      units: 5,
+      plusUnits: 5,
+      avgDiff: 5510,
+    });
+  });
+  it('負の平均も読む', () => {
+    expect(r.find((x) => x.machineName === '甲鉄城のカバネリ 海門決戦')).toMatchObject({ units: 16, plusUnits: 5, avgDiff: -140 });
+  });
+  it('DMM リンクがあってもスロットのキーは name: のまま', () => {
+    expect(r.every((x) => x.machineKey.startsWith('name:'))).toBe(true);
+  });
+});

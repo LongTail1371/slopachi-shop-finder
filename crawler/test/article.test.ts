@@ -32,4 +32,27 @@ describe('parseArticle', () => {
       '<h2>9月1日 X店</h2><p><strong>【れんじろう実践来店】</strong></p></div></body></html>';
     expect(parseArticle(html, URL, AT)).toEqual({ ok: false, reason: '機種結果が 0 件' });
   });
+
+  it('地域行なし記事: パチンコ 2 機種を読み、都道府県は h2 から補う', () => {
+    const r = parseArticle(fixture('article-station-nopref-2026-09-10.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.store).toEqual({ name: 'エクス・アリーナ 東京', prefecture: '東京都', city: '' });
+    expect(r.article.coverageType).toBe('スロパチステーション来店取材');
+    expect(r.article.results).toHaveLength(2);
+    expect(r.article.results[0]).toEqual({
+      category: 'pachinko', machineKey: 'dmm:4782', machineName: '東京喰種', units: 30, plusUnits: 21, avgDiff: 8760,
+    });
+    expect(r.article.results[1]).toMatchObject({ machineKey: 'dmm:4846', avgDiff: -3250, plusUnits: 10 });
+  });
+
+  it('あかまる記事: スロット形式 C を 17 件読む', () => {
+    const r = parseArticle(fixture('article-akamaru-2026-09-11.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.coverageType).toBe('東京あかまる来店取材');
+    expect(r.article.store).toEqual({ name: 'マルハンメガシティ2000蒲田1', prefecture: '東京都', city: '大田区' });
+    expect(r.article.results).toHaveLength(17);
+    expect(r.article.results.every((x) => x.category === 'slot')).toBe(true);
+  });
 });

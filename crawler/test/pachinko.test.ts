@@ -38,4 +38,9 @@ describe('parsePachinko', () => {
     const { body } = loadBody(fixture('article-station-2026-09-11.html'));
     expect(parsePachinko(body)).toEqual([]);
   });
+
+  it('h4 の直後が表（スロット形式 C）の記事ではパチンコ結果を出さない', () => {
+    const { body } = loadBody(fixture('article-akamaru-2026-09-11.html'));
+    expect(parsePachinko(body)).toEqual([]);
+  });
 });

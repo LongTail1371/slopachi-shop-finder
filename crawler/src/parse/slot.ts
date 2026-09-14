@@ -47,18 +47,21 @@ function parseUnitTables(body: Cheerio<Element>): MachineResult[] {
   }));
 }
 
-/** 形式 B: <h2>【機種 台番】</h2> … <table><th>プラス台</th>… */
+/**
+ * 形式 B: <h2>【機種 台番】</h2> … <table><th>プラス台</th>…
+ * 形式 C: <div><h4>【機種名】</h4><p><img></p><table>…</table></div>（台番なし）
+ */
 function parseGroupHeadings(body: Cheerio<Element>): MachineResult[] {
   const out: MachineResult[] = [];
 
-  body.find('h2').each((_, h2El) => {
-    const h2 = body.find(h2El);
-    const labels = extractBrackets(cleanText(h2.text()));
+  body.find('h2, h4').each((_, headingEl) => {
+    const heading = body.find(headingEl);
+    const labels = extractBrackets(cleanText(heading.text()));
     if (labels.length === 0) return;
 
-    const table = h2.nextAll('table').first();
+    const table = heading.nextAll('table').first();
     if (table.length === 0) return;
-    if (table.prevAll('h2').first()[0] !== h2El) return; // 別の h2 の表
+    if (table.prevAll('h2, h4').first()[0] !== headingEl) return; // 別の見出しの表
 
     const rowValue = (label: string): string => {
       const tr = table.find('tr').filter((_, trEl) => cellTexts(body, trEl, 'th')[0] === label).first();

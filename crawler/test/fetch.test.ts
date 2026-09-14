@@ -11,7 +11,7 @@ describe('createFetcher', () => {
     const sleep = vi.fn(async () => {});
     const f = createFetcher({ fetchFn, sleep, now: () => 0 });
     await expect(f('https://a.test/')).resolves.toBe('<html>x</html>');
-    const init = fetchFn.mock.calls[0]![1] as RequestInit;
+    const init = (fetchFn.mock.calls[0] as unknown as [string, RequestInit])[1];
     expect((init.headers as Record<string, string>)['User-Agent']).toBe(USER_AGENT);
   });
 
