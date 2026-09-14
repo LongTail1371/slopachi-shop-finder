@@ -35,6 +35,15 @@ describe('ShopRow', () => {
     expect(segs[2]).toHaveClass('plus');   // 9/13 +13700
   });
 
+  it('平均が 0 のときは色クラスを付けない（中立表示）', () => {
+    const neutralShop: ShopHit = { ...shop, avgDiffMean: 0 };
+    render(<ul><ShopRow shop={neutralShop} category="pachinko" open={false} onToggle={() => {}} /></ul>);
+    const row = screen.getByRole('listitem');
+    const avgValue = within(row).getByText('±0玉');
+    expect(avgValue).not.toHaveClass('plus');
+    expect(avgValue).not.toHaveClass('minus');
+  });
+
   it('開くと記事一覧と元記事リンクが出る', async () => {
     const onToggle = vi.fn();
     const { rerender } = render(<ul><ShopRow shop={shop} category="pachinko" open={false} onToggle={onToggle} /></ul>);

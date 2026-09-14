@@ -84,12 +84,12 @@ export function App() {
       {load.status === 'error' && <p className="empty">データを読み込めませんでした。ページを再読み込みしてください。</p>}
 
       {load.status === 'ready' && state.view === 'store' && (
-        <StoreLookup matches={storeMatches} query={state.storeQuery} onQueryChange={(q) => setState({ ...state, storeQuery: q })} onSelectMachine={selectMachine} />
+        <StoreLookup matches={storeMatches} query={state.storeQuery} onQueryChange={(q) => setState({ ...state, storeQuery: q })} onSelectMachine={selectMachine} windowDays={load.data.windowDays} />
       )}
 
       {load.status === 'ready' && state.view === 'machine' && (
         <>
-          <MachineSearch machines={machines} category={state.category} query={query} onQueryChange={setQuery} onSelect={selectMachine} />
+          <MachineSearch machines={machines} category={state.category} query={query} onQueryChange={setQuery} onSelect={selectMachine} windowDays={load.data.windowDays} />
           {state.machineKey && !machine && (
             <p className="empty">この機種は直近{load.data.windowDays}日の取材に載っていません。別の機種を選んでください。</p>
           )}

@@ -8,9 +8,10 @@ interface Props {
   query: string;
   onQueryChange: (q: string) => void;
   onSelect: (machineKey: string) => void;
+  windowDays: number;
 }
 
-export function MachineSearch({ machines, category, query, onQueryChange, onSelect }: Props) {
+export function MachineSearch({ machines, category, query, onQueryChange, onSelect, windowDays }: Props) {
   const id = useId();
   const candidates = searchMachines(machines, category, query);
   const isBrowsing = query.trim() === '';
@@ -27,9 +28,9 @@ export function MachineSearch({ machines, category, query, onQueryChange, onSele
         autoComplete="off"
         onChange={(e) => onQueryChange(e.target.value)}
       />
-      <p className="search-hint">{isBrowsing ? '直近90日でよく取材に載った機種' : `${candidates.length}件`}</p>
+      <p className="search-hint">{isBrowsing ? `直近${windowDays}日でよく取材に載った機種` : `${candidates.length}件`}</p>
       {candidates.length === 0 ? (
-        <p className="empty">この名前の機種は直近90日の取材に載っていません。別の表記で試してください。</p>
+        <p className="empty">{`この名前の機種は直近${windowDays}日の取材に載っていません。別の表記で試してください。`}</p>
       ) : (
         <ul className="candidates" role="listbox" aria-label="機種の候補">
           {candidates.map((m) => (

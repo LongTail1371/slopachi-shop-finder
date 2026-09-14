@@ -11,21 +11,26 @@ const machines = [m('dmm:1', '真・北斗無双 第5章', 9), m('dmm:2', '押�
 
 describe('MachineSearch', () => {
   it('空入力では種別内の上位機種を候補に出す', () => {
-    render(<MachineSearch machines={machines} category="pachinko" query="" onQueryChange={() => {}} onSelect={() => {}} />);
+    render(<MachineSearch machines={machines} category="pachinko" query="" onQueryChange={() => {}} onSelect={() => {}} windowDays={90} />);
     const options = screen.getAllByRole('option');
     expect(options.map((o) => o.textContent)).toEqual([expect.stringContaining('真・北斗無双 第5章'), expect.stringContaining('押忍！番長 漢の頂')]);
   });
 
   it('入力で候補が絞られ、選ぶと onSelect が呼ばれる', async () => {
     const onSelect = vi.fn();
-    render(<MachineSearch machines={machines} category="pachinko" query="番長" onQueryChange={() => {}} onSelect={onSelect} />);
+    render(<MachineSearch machines={machines} category="pachinko" query="番長" onQueryChange={() => {}} onSelect={onSelect} windowDays={90} />);
     expect(screen.getAllByRole('option')).toHaveLength(1);
     await userEvent.click(screen.getByRole('option'));
     expect(onSelect).toHaveBeenCalledWith('dmm:2');
   });
 
   it('該当なしの文言', () => {
-    render(<MachineSearch machines={machines} category="pachinko" query="存在しない" onQueryChange={() => {}} onSelect={() => {}} />);
+    render(<MachineSearch machines={machines} category="pachinko" query="存在しない" onQueryChange={() => {}} onSelect={() => {}} windowDays={90} />);
     expect(screen.getByText('この名前の機種は直近90日の取材に載っていません。別の表記で試してください。')).toBeInTheDocument();
+  });
+
+  it('windowDays を反映する', () => {
+    render(<MachineSearch machines={machines} category="pachinko" query="存在しない" onQueryChange={() => {}} onSelect={() => {}} windowDays={30} />);
+    expect(screen.getByText('この名前の機種は直近30日の取材に載っていません。別の表記で試してください。')).toBeInTheDocument();
   });
 });

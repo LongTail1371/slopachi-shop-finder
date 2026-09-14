@@ -7,6 +7,11 @@ async function writeJson(path: string, value: unknown): Promise<void> {
   await writeFile(path, JSON.stringify(value, null, 2) + '\n', 'utf-8');
 }
 
+async function writeJsonCompact(path: string, value: unknown): Promise<void> {
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, JSON.stringify(value) + '\n', 'utf-8');
+}
+
 export async function readArticles(path: string): Promise<Article[]> {
   try {
     const parsed = JSON.parse(await readFile(path, 'utf-8')) as ArticlesFile;
@@ -38,7 +43,8 @@ export async function readErrors(path: string): Promise<CrawlError[]> {
 
 export async function writeMachines(path: string, machines: MachineSummary[], generatedAt: string): Promise<void> {
   const file: MachinesFile = { generatedAt, windowDays: 90, machines };
-  await writeJson(path, file);
+  // machines.json は日次で配信・フェッチされるファイルなのでサイズを抑えるため圧縮出力する。
+  await writeJsonCompact(path, file);
 }
 
 export function cutoffDate(today: string, windowDays: number): string {

@@ -7,9 +7,10 @@ interface Props {
   query: string;
   onQueryChange: (q: string) => void;
   onSelectMachine: (machineKey: string) => void;
+  windowDays: number;
 }
 
-export function StoreLookup({ matches, query, onQueryChange, onSelectMachine }: Props) {
+export function StoreLookup({ matches, query, onQueryChange, onSelectMachine, windowDays }: Props) {
   const id = useId();
   return (
     <section className="search">
@@ -17,9 +18,9 @@ export function StoreLookup({ matches, query, onQueryChange, onSelectMachine }: 
       <input id={`${id}-input`} className="search-input" type="search" value={query} placeholder="例: 草加、マルハン" autoComplete="off"
              onChange={(e) => onQueryChange(e.target.value)} />
       {query.trim() === '' ? (
-        <p className="empty">店舗名の一部を入れると、その店で直近90日に取材で載った機種が出ます。</p>
+        <p className="empty">{`店舗名の一部を入れると、その店で直近${windowDays}日に取材で載った機種が出ます。`}</p>
       ) : matches.length === 0 ? (
-        <p className="empty">この名前の店舗は直近90日の取材にありません。</p>
+        <p className="empty">{`この名前の店舗は直近${windowDays}日の取材にありません。`}</p>
       ) : (
         matches.map((st) => (
           <section key={`${st.prefecture}|${st.storeName}`} className="store">

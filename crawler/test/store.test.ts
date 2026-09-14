@@ -3,7 +3,7 @@ import { mkdtemp, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import type { Article } from '../../shared/types';
-import { readArticles, writeArticles, pruneOld, cutoffDate, writeErrors, readErrors } from '../src/store';
+import { readArticles, writeArticles, pruneOld, cutoffDate, writeErrors, readErrors, writeMachines } from '../src/store';
 
 function art(url: string, visitDate: string): Article {
   return {
@@ -46,6 +46,16 @@ describe('store', () => {
   it('無い errors.json は空配列', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'store-'));
     expect(await readErrors(join(dir, 'none.json'))).toEqual([]);
+  });
+
+  it('machines.json は圧縮出力する（2 スペースインデントを含まない）', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'store-'));
+    const p = join(dir, 'machines.json');
+    await writeMachines(p, [], '2026-09-15T00:00:00.000Z');
+    const raw = await readFile(p, 'utf-8');
+    expect(raw).not.toMatch(/\n {2}/);
+    expect(raw.endsWith('\n')).toBe(true);
+    expect(JSON.parse(raw)).toEqual({ generatedAt: '2026-09-15T00:00:00.000Z', windowDays: 90, machines: [] });
   });
 });
 
