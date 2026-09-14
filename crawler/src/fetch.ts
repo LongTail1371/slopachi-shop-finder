@@ -1,4 +1,4 @@
-export const USER_AGENT = 'slopachi-shop-finder/1.0 (private use; contact: nagao.kohei@yw.mitsubishielectric.co.jp)';
+export const USER_AGENT = 'slopachi-shop-finder/1.0 (private use; contact: https://github.com/LongTail1371/slopachi-shop-finder)';
 const MIN_INTERVAL_MS = 1000;
 const MAX_RETRIES = 3;
 

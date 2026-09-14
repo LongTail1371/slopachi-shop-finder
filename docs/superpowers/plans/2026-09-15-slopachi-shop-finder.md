@@ -14,7 +14,7 @@
 
 - 対象一覧 URL は次の 3 本のみ: `https://777.slopachi-station.com/report_pref/tokyo/`、`https://777.slopachi-station.com/report/minami-kanto/`、`https://777.slopachi-station.com/report/kita-kanto/`。ページ送りは `.../page/N`。
 - 収集期間は「訪問日が実行日から 90 日以内」。90 日より古い記事は `articles.json` から削除する。
-- リクエスト間隔 1 秒以上、並列取得なし、リトライ 3 回（指数バックオフ）。User-Agent は `slopachi-shop-finder/1.0 (private use; contact: nagao.kohei@yw.mitsubishielectric.co.jp)`。
+- リクエスト間隔 1 秒以上、並列取得なし、リトライ 3 回（指数バックオフ）。User-Agent は `slopachi-shop-finder/1.0 (private use; contact: https://github.com/LongTail1371/slopachi-shop-finder)`。
 - 1 回の実行で新規取得する記事は最大 300 件。
 - 保存するのは店舗名・日付・数値・元記事 URL のみ。記事本文・画像は保存しない。
 - 画面は `<meta name="robots" content="noindex">` を付ける。
@@ -1487,7 +1487,7 @@ Expected: FAIL
 
 `crawler/src/fetch.ts`
 ```ts
-export const USER_AGENT = 'slopachi-shop-finder/1.0 (private use; contact: nagao.kohei@yw.mitsubishielectric.co.jp)';
+export const USER_AGENT = 'slopachi-shop-finder/1.0 (private use; contact: https://github.com/LongTail1371/slopachi-shop-finder)';
 const MIN_INTERVAL_MS = 1000;
 const MAX_RETRIES = 3;
 
