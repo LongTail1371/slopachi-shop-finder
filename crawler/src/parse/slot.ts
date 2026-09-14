@@ -68,8 +68,8 @@ function parseGroupHeadings(body: Cheerio<Element>): MachineResult[] {
       return cleanText(tr.find('td').first().text());
     };
     const plusM = rowValue('プラス台').match(/(\d+)\s*台\s*\/\s*(\d+)\s*台/);
+    if (!plusM) return;
     const avgDiff = parseSignedInt(rowValue('平均差枚数'));
-    if (!plusM || avgDiff === null) return;
 
     const parsed = labels.map(splitNameAndUnits).filter((p) => !isExcludedMachineName(p.name));
     for (const { name, unitNumbers } of parsed) {

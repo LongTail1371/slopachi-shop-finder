@@ -12,7 +12,7 @@ export interface MachineResult {
   machineName: string;   // 記事上の表記
   units: number;         // 集計対象台数
   plusUnits: number;     // プラス台数
-  avgDiff: number;       // 平均差玉(玉) / 平均差枚(枚)。符号付き整数
+  avgDiff: number | null;       // 平均差玉(玉) / 平均差枚(枚)。符号付き整数。記事に平均の記載が無ければ null
   unitNumbers?: string;  // スロットの台番 '604〜609' / '489,490'
   shared?: true;         // 2 機種以上が同じ集計値を共有する見出しから取った場合
 }
@@ -33,7 +33,7 @@ export interface ShopArticleRef {
   coverageType: string;
   units: number;
   plusUnits: number;
-  avgDiff: number;
+  avgDiff: number | null;
   shared?: true;
 }
 
@@ -43,7 +43,7 @@ export interface ShopHit {
   city: string;
   hitCount: number;
   lastVisitDate: string;
-  avgDiffMean: number;   // 各記事 avgDiff の単純平均（四捨五入して整数）
+  avgDiffMean: number | null;   // 各記事 avgDiff の単純平均（四捨五入して整数）
   plusRate: number;      // Σplus / Σunits（0〜1）
   articles: ShopArticleRef[]; // visitDate 降順
 }

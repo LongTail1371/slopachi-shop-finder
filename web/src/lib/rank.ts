@@ -22,11 +22,12 @@ export interface ShopFilter {
 function rebuildShop(base: ShopHit, articles: ShopArticleRef[]): ShopHit {
   const totalUnits = articles.reduce((n, a) => n + a.units, 0);
   const totalPlus = articles.reduce((n, a) => n + a.plusUnits, 0);
+  const known = articles.filter((a) => a.avgDiff !== null);
   return {
     ...base,
     hitCount: articles.length,
     lastVisitDate: articles[0]!.visitDate,
-    avgDiffMean: Math.round(articles.reduce((n, a) => n + a.avgDiff, 0) / articles.length),
+    avgDiffMean: known.length > 0 ? Math.round(known.reduce((n, a) => n + a.avgDiff!, 0) / known.length) : null,
     plusRate: totalUnits > 0 ? Math.round((totalPlus / totalUnits) * 1000) / 1000 : 0,
     articles,
   };
@@ -67,7 +68,7 @@ export interface StoreMatch {
   storeName: string;
   prefecture: string;
   city: string;
-  machines: { machineKey: string; displayName: string; category: Category; hitCount: number; lastVisitDate: string; avgDiffMean: number }[];
+  machines: { machineKey: string; displayName: string; category: Category; hitCount: number; lastVisitDate: string; avgDiffMean: number | null }[];
 }
 
 export function lookupStores(machines: MachineSummary[], query: string, category: Category): StoreMatch[] {

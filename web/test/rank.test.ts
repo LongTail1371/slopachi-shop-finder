@@ -2,12 +2,13 @@ import { describe, it, expect } from 'vitest';
 import type { MachineSummary, ShopHit } from '../../shared/types';
 import { searchMachines, filterShops, availableFilters, lookupStores, normalizeForSearch } from '../src/lib/rank';
 
-function shop(storeName: string, prefecture: string, articles: { d: string; t: string; avg: number; units?: number; plus?: number }[]): ShopHit {
+function shop(storeName: string, prefecture: string, articles: { d: string; t: string; avg: number | null; units?: number; plus?: number }[]): ShopHit {
   const arts = articles.map((a) => ({ url: `u-${a.d}`, visitDate: a.d, coverageType: a.t, units: a.units ?? 4, plusUnits: a.plus ?? 2, avgDiff: a.avg }));
   arts.sort((x, y) => (x.visitDate < y.visitDate ? 1 : -1));
+  const known = arts.filter((a): a is typeof a & { avgDiff: number } => a.avgDiff !== null);
   return {
     storeName, prefecture, city: 'c', hitCount: arts.length, lastVisitDate: arts[0]!.visitDate,
-    avgDiffMean: Math.round(arts.reduce((n, a) => n + a.avgDiff, 0) / arts.length),
+    avgDiffMean: known.length > 0 ? Math.round(known.reduce((n, a) => n + a.avgDiff, 0) / known.length) : null,
     plusRate: arts.reduce((n, a) => n + a.plusUnits, 0) / arts.reduce((n, a) => n + a.units, 0), articles: arts,
   };
 }
@@ -58,6 +59,14 @@ describe('filterShops', () => {
   });
   it('記事が 0 件になった店舗は消える', () => {
     expect(filterShops(hokuto, { prefectures: [], coverageTypes: ['スロパチステーション来店取材'] }).map((s) => s.storeName)).toEqual(['A店']);
+  });
+  it('絞り込んだ結果 avg が全て null の店舗は avgDiffMean が null', () => {
+    const noAvgShop = machine('dmm:3', '無平均機種', 'pachinko', [
+      shop('D店', '埼玉県', [{ d: '2026-09-01', t: 'るいべえ実践来店', avg: null }, { d: '2026-09-02', t: 'スロパチステーション来店取材', avg: 500 }]),
+    ]);
+    const r = filterShops(noAvgShop, { prefectures: [], coverageTypes: ['るいべえ実践来店'] });
+    expect(r).toHaveLength(1);
+    expect(r[0]).toMatchObject({ avgDiffMean: null });
   });
 });
 

@@ -6,6 +6,7 @@ describe('format', () => {
     expect(formatDiff(4620, 'pachinko')).toBe('+4,620玉');
     expect(formatDiff(-300, 'slot')).toBe('-300枚');
     expect(formatDiff(0, 'pachinko')).toBe('±0玉');
+    expect(formatDiff(null, 'pachinko')).toBe('—');
   });
   it('率と日付', () => {
     expect(formatRate(0.667)).toBe('67%');

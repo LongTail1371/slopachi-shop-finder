@@ -70,6 +70,22 @@ describe('parseSlot 形式 B（機種見出し + 縦持ち表）', () => {
   });
 });
 
+describe('parseSlot 平均差枚数の無い記事', () => {
+  const { body } = loadBody(fixture('article-girlps-noavg-2026-09-01.html'));
+  const r = parseSlot(body);
+  it('11 件を読み、平均は null', () => {
+    expect(r).toHaveLength(11);
+    expect(r[0]).toEqual({
+      category: 'slot', machineKey: 'name:東京喰種', machineName: '東京喰種',
+      units: 4, plusUnits: 3, avgDiff: null, unitNumbers: '1585〜1588',
+    });
+    expect(r.every((x) => x.avgDiff === null)).toBe(true);
+  });
+  it('2 機種混在は shared 付きで両方入る', () => {
+    expect(r.filter((x) => x.shared)).toHaveLength(2);
+  });
+});
+
 describe('parseSlot 形式 C（h4 見出し + 縦持ち表、台番なし）', () => {
   const { body } = loadBody(fixture('article-akamaru-2026-09-11.html'));
   const r = parseSlot(body);

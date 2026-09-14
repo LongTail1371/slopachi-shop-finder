@@ -6,18 +6,21 @@ interface Merged {
   machineName: string;
   units: number;
   plusUnits: number;
-  avgDiff: number;
+  avgDiff: number | null;
   shared?: true;
 }
 
 /** 記事内で同じ machineKey を 1 件に統合する */
 export function mergeWithinArticle(results: MachineResult[]): Map<string, Merged> {
-  const acc = new Map<string, { category: Category; machineName: string; units: number; plus: number; weighted: number; shared: boolean }>();
+  const acc = new Map<string, { category: Category; machineName: string; units: number; plus: number; weighted: number; weightedUnits: number; shared: boolean }>();
   for (const r of results) {
-    const cur = acc.get(r.machineKey) ?? { category: r.category, machineName: r.machineName, units: 0, plus: 0, weighted: 0, shared: false };
+    const cur = acc.get(r.machineKey) ?? { category: r.category, machineName: r.machineName, units: 0, plus: 0, weighted: 0, weightedUnits: 0, shared: false };
     cur.units += r.units;
     cur.plus += r.plusUnits;
-    cur.weighted += r.avgDiff * r.units;
+    if (r.avgDiff !== null) {
+      cur.weighted += r.avgDiff * r.units;
+      cur.weightedUnits += r.units;
+    }
     cur.shared = cur.shared || r.shared === true;
     acc.set(r.machineKey, cur);
   }
@@ -28,7 +31,7 @@ export function mergeWithinArticle(results: MachineResult[]): Map<string, Merged
       machineName: v.machineName,
       units: v.units,
       plusUnits: v.plus,
-      avgDiff: v.units > 0 ? roundHalfAwayFromZero(v.weighted / v.units) : 0,
+      avgDiff: v.weightedUnits > 0 ? roundHalfAwayFromZero(v.weighted / v.weightedUnits) : null,
       ...(v.shared ? { shared: true as const } : {}),
     });
   }
@@ -67,11 +70,12 @@ export function aggregate(articles: Article[]): MachineSummary[] {
       const articlesDesc = [...s.articles].sort((x, y) => (x.visitDate < y.visitDate ? 1 : x.visitDate > y.visitDate ? -1 : 0));
       const totalUnits = articlesDesc.reduce((n, r) => n + r.units, 0);
       const totalPlus = articlesDesc.reduce((n, r) => n + r.plusUnits, 0);
+      const known = articlesDesc.filter((r) => r.avgDiff !== null);
       return {
         storeName: s.storeName, prefecture: s.prefecture, city: s.city,
         hitCount: articlesDesc.length,
         lastVisitDate: articlesDesc[0]!.visitDate,
-        avgDiffMean: roundHalfAwayFromZero(articlesDesc.reduce((n, r) => n + r.avgDiff, 0) / articlesDesc.length),
+        avgDiffMean: known.length > 0 ? roundHalfAwayFromZero(known.reduce((n, r) => n + r.avgDiff!, 0) / known.length) : null,
         plusRate: totalUnits > 0 ? Math.round((totalPlus / totalUnits) * 1000) / 1000 : 0,
         articles: articlesDesc,
       };

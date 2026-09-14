@@ -4,7 +4,8 @@ export function unitLabel(category: Category): string {
   return category === 'pachinko' ? '玉' : '枚';
 }
 
-export function formatDiff(n: number, category: Category): string {
+export function formatDiff(n: number | null, category: Category): string {
+  if (n === null) return '—';
   const sign = n > 0 ? '+' : n < 0 ? '-' : '±';
   return `${sign}${Math.abs(n).toLocaleString('ja-JP')}${unitLabel(category)}`;
 }

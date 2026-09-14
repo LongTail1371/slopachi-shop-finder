@@ -44,6 +44,30 @@ describe('ShopRow', () => {
     expect(avgValue).not.toHaveClass('minus');
   });
 
+  it('avgDiff が null の記事は seg none クラスになり plus/minus は付かない', () => {
+    const withNull: ShopHit = {
+      ...shop,
+      articles: [
+        ...shop.articles,
+        { url: 'https://s/4/', visitDate: '2026-08-20', coverageType: 'るいべえ実践来店', units: 5, plusUnits: 3, avgDiff: null },
+      ],
+    };
+    render(<ul><ShopRow shop={withNull} category="pachinko" open={false} onToggle={() => {}} /></ul>);
+    const segs = screen.getByRole('listitem').querySelectorAll('.seg');
+    expect(segs).toHaveLength(4);
+    const noneSeg = segs[0]!;
+    expect(noneSeg).toHaveClass('none');
+    expect(noneSeg).not.toHaveClass('plus');
+    expect(noneSeg).not.toHaveClass('minus');
+  });
+
+  it('avgDiffMean が null の店舗は — を表示する', () => {
+    const nullMeanShop: ShopHit = { ...shop, avgDiffMean: null };
+    render(<ul><ShopRow shop={nullMeanShop} category="pachinko" open={false} onToggle={() => {}} /></ul>);
+    const row = screen.getByRole('listitem');
+    expect(within(row).getByText('—')).toBeInTheDocument();
+  });
+
   it('開くと記事一覧と元記事リンクが出る', async () => {
     const onToggle = vi.fn();
     const { rerender } = render(<ul><ShopRow shop={shop} category="pachinko" open={false} onToggle={onToggle} /></ul>);

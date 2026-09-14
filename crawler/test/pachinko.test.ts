@@ -63,4 +63,11 @@ describe('parsePachinko', () => {
     expect(a).toMatchObject({ units: 3, plusUnits: 2, avgDiff: 1000, machineKey: 'dmm:1111' });
     expect(b).toMatchObject({ units: 5, plusUnits: 1, avgDiff: -2000, machineKey: 'dmm:2222' });
   });
+
+  it('平均差玉数の無い記事は台数・プラス台だけ読み avgDiff は null', () => {
+    const { body } = loadBody(fixture('article-girlps-noavg-2026-09-01.html'));
+    const r = parsePachinko(body);
+    expect(r).toHaveLength(11);
+    expect(r[0]).toEqual({ category: 'pachinko', machineKey: expect.stringMatching(/^(dmm:\d+|name:.+)$/), machineName: '東京喰種', units: 22, plusUnits: 13, avgDiff: null });
+  });
 });

@@ -22,10 +22,9 @@ export function parsePachinko(body: Cheerio<Element>): MachineResult[] {
     const preEls = section.filter('pre').add(section.find('pre'));
     const pres = preEls.map((_, p) => cleanText(body.find(p).text())).get();
     const unitsM = pres.map((t) => t.match(UNITS_RE)).find(Boolean);
+    if (!unitsM) return;
     const avgM = pres.map((t) => t.match(AVG_RE)).find(Boolean);
-    if (!unitsM || !avgM) return;
-    const avgDiff = parseSignedInt(avgM[1]!);
-    if (avgDiff === null) return;
+    const avgDiff = avgM ? parseSignedInt(avgM[1]!) : null;
 
     const linkSelector = 'a[href*="p-town.dmm.com/machines/"]';
     const links = section.filter(linkSelector).add(section.find(linkSelector));

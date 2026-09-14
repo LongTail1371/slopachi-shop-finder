@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import type { Article, MachineResult } from '../../shared/types';
 import { aggregate } from '../src/aggregate';
 
-function res(machineKey: string, machineName: string, units: number, plusUnits: number, avgDiff: number, extra: Partial<MachineResult> = {}): MachineResult {
+function res(machineKey: string, machineName: string, units: number, plusUnits: number, avgDiff: number | null, extra: Partial<MachineResult> = {}): MachineResult {
   return { category: 'pachinko', machineKey, machineName, units, plusUnits, avgDiff, ...extra };
 }
 function art(url: string, visitDate: string, storeName: string, results: MachineResult[], coverageType = 'るいべえ実践来店'): Article {
@@ -62,5 +62,25 @@ describe('aggregate', () => {
       art('u2', '2026-09-02', 'B店', [res('dmm:2', 'Y', 1, 1, 1)]),
     ]);
     expect(out.map((m) => m.machineKey)).toEqual(['dmm:2', 'dmm:1']);
+  });
+
+  it('平均が null の結果は平均計算から除き、全て null なら null', () => {
+    const out = aggregate([
+      art('u1', '2026-09-01', 'A店', [res('dmm:1', '北斗', 3, 2, null)]),
+      art('u2', '2026-09-02', 'A店', [res('dmm:1', '北斗', 2, 1, 1000)]),
+      art('u3', '2026-09-03', 'B店', [res('dmm:1', '北斗', 2, 2, null)]),
+    ]);
+    const a = out[0]!.shops.find((s) => s.storeName === 'A店')!;
+    expect(a.hitCount).toBe(2);
+    expect(a.avgDiffMean).toBe(1000);
+    expect(a.plusRate).toBe(0.6);
+    expect(out[0]!.shops.find((s) => s.storeName === 'B店')!.avgDiffMean).toBeNull();
+  });
+  it('記事内統合で null と数値が混ざれば数値側だけの重み付き平均', () => {
+    const out = aggregate([art('u1', '2026-09-01', 'A店', [
+      res('name:x', 'x', 4, 4, null, { category: 'slot' }),
+      res('name:x', 'x', 2, 1, 3000, { category: 'slot' }),
+    ])]);
+    expect(out[0]!.shops[0]!.articles[0]).toMatchObject({ units: 6, plusUnits: 5, avgDiff: 3000 });
   });
 });

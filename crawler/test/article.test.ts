@@ -55,4 +55,13 @@ describe('parseArticle', () => {
     expect(r.article.results).toHaveLength(17);
     expect(r.article.results.every((x) => x.category === 'slot')).toBe(true);
   });
+
+  it('平均の無い記事も ok になり、店舗情報は表から取れる', () => {
+    const r = parseArticle(fixture('article-girlps-noavg-2026-09-01.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.store).toEqual({ name: 'FACE1100瑞穂', prefecture: '東京都', city: '' });
+    expect(r.article.coverageType).toBe('スロぱちガール来店PS');
+    expect(r.article.results).toHaveLength(22);
+  });
 });
