@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cleanText, parseSignedInt, toHalfWidth, extractBrackets } from '../src/text';
+import { cleanText, parseSignedInt, toHalfWidth, extractBrackets, roundHalfAwayFromZero } from '../src/text';
 
 describe('cleanText', () => {
   it('nbsp と全角空白と改行を 1 つの半角空白にする', () => {
@@ -29,5 +29,17 @@ describe('extractBrackets', () => {
   it('【】の中身を順に返す', () => {
     expect(extractBrackets('【からくり2 451】\n【スマスロゴッド 452,453】')).toEqual(['からくり2 451', 'スマスロゴッド 452,453']);
     expect(extractBrackets('なし')).toEqual([]);
+  });
+});
+
+describe('roundHalfAwayFromZero', () => {
+  it('0 から遠い側へ四捨五入する', () => {
+    expect(roundHalfAwayFromZero(-0.5)).toBe(-1);
+    expect(roundHalfAwayFromZero(-1.5)).toBe(-2);
+    expect(roundHalfAwayFromZero(1.5)).toBe(2);
+    expect(roundHalfAwayFromZero(2.4)).toBe(2);
+    expect(roundHalfAwayFromZero(-2.4)).toBe(-2);
+    expect(roundHalfAwayFromZero(0)).toBe(0);
+    expect(Object.is(roundHalfAwayFromZero(0), -0)).toBe(false);
   });
 });

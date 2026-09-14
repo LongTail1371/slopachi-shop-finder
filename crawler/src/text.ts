@@ -24,3 +24,8 @@ export function toHalfWidth(s: string): string {
 export function extractBrackets(s: string): string[] {
   return [...s.matchAll(/【([^】]+)】/g)].map((m) => m[1]!.trim());
 }
+
+/** 四捨五入（0 から遠い側へ）。Math.round は -0.5 → -0 になるため使わない */
+export function roundHalfAwayFromZero(n: number): number {
+  return Math.sign(n) * Math.round(Math.abs(n)) || 0;
+}

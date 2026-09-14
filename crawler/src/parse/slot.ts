@@ -1,7 +1,7 @@
 import type { Cheerio } from 'cheerio';
 import type { Element } from 'domhandler';
 import type { MachineResult } from '../../../shared/types';
-import { cleanText, extractBrackets, parseSignedInt } from '../text';
+import { cleanText, extractBrackets, parseSignedInt, roundHalfAwayFromZero } from '../text';
 import { isExcludedMachineName, machineKeyFor } from '../normalize';
 
 export function parseSlot(body: Cheerio<Element>): MachineResult[] {
@@ -42,7 +42,7 @@ function parseUnitTables(body: Cheerio<Element>): MachineResult[] {
     machineName: name,
     units: ds.length,
     plusUnits: ds.filter((d) => d > 0).length,
-    avgDiff: Math.round(ds.reduce((a, b) => a + b, 0) / ds.length),
+    avgDiff: roundHalfAwayFromZero(ds.reduce((a, b) => a + b, 0) / ds.length),
     unitNumbers: (units.get(name) ?? []).join(','),
   }));
 }
