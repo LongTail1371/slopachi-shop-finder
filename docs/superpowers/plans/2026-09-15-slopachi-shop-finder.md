@@ -25,7 +25,7 @@
 
 ## 調査で確定した HTML 構造（パーサ実装の根拠）
 
-記事本文は `div.entry.col-md-12` の中。以下は実記事から抜いた構造。
+記事本文は `div#entry` の中（h1・店舗情報表・本文を含み、末尾の関連記事リストは含まない。店舗情報表は `div.entry.col-md-12` の外側にあるので、そちらをスコープにしてはいけない）。以下は実記事から抜いた構造。
 
 **店舗情報表**（本文冒頭の `<table>` 内 `<td>`。`<br>` 区切り、ラベル後に `&nbsp;`）
 ```html
@@ -497,7 +497,7 @@ git commit -m "feat: 文字列ユーティリティ（数値・空白・全角�
 
 **Interfaces:**
 - Produces:
-  - `loadBody(html: string): { $: CheerioAPI; body: Cheerio<Element>; title: string }` — `div.entry.col-md-12` を本文とする。無ければ `<body>` 全体
+  - `loadBody(html: string): { $: CheerioAPI; body: Cheerio<Element>; title: string }` — `div#entry` を本文とする。無ければ `div.entry.col-md-12`、それも無ければ `<body>` 全体
   - `parseStoreInfo(body: Cheerio<Element>): { store: StoreInfo; visitDate: string } | null` — 必須項目（店舗・訪問日・都道府県）が取れなければ `null`
 - Consumes: Task 2 `cleanText`
 
@@ -571,7 +571,7 @@ export interface LoadedBody {
 
 export function loadBody(html: string): LoadedBody {
   const $ = cheerio.load(html);
-  const entry = $('div.entry.col-md-12');
+  const entry = $('div#entry').length > 0 ? $('div#entry') : $('div.entry.col-md-12');
   const body = entry.length > 0 ? entry.first() : $('body');
   const title = $('title').first().text().replace(/\s*\|\s*スロパチステーション.*$/, '').trim();
   return { $, body, title };
