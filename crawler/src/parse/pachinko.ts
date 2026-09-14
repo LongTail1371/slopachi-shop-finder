@@ -15,15 +15,21 @@ export function parsePachinko(body: Cheerio<Element>): MachineResult[] {
     const name = extractBrackets(cleanText(h4.text()))[0];
     if (!name || isExcludedMachineName(name)) return;
 
-    const section = h4.parent();
-    const pres = section.find('pre').map((_, p) => cleanText(body.find(p).text())).get();
+    // 次の見出し（h2 か次の h4）までの要素だけをこの機種のセクションとみなす。
+    // 記事によっては見出しごとに div でラップされず、h4/pre が本文の直接の兄弟
+    // 要素として並ぶことがあるため、h4.parent() では区切れない。
+    const section = h4.nextUntil('h2, h4');
+    const preEls = section.filter('pre').add(section.find('pre'));
+    const pres = preEls.map((_, p) => cleanText(body.find(p).text())).get();
     const unitsM = pres.map((t) => t.match(UNITS_RE)).find(Boolean);
     const avgM = pres.map((t) => t.match(AVG_RE)).find(Boolean);
     if (!unitsM || !avgM) return;
     const avgDiff = parseSignedInt(avgM[1]!);
     if (avgDiff === null) return;
 
-    const href = section.find('a[href*="p-town.dmm.com/machines/"]').first().attr('href') ?? '';
+    const linkSelector = 'a[href*="p-town.dmm.com/machines/"]';
+    const links = section.filter(linkSelector).add(section.find(linkSelector));
+    const href = links.first().attr('href') ?? '';
     const dmmId = href.match(DMM_RE)?.[1] ?? null;
 
     out.push({
