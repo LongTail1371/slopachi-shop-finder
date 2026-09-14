@@ -103,7 +103,7 @@
 | `article-ruibee-2026-09-06.html` | るいべえ実践来店。新！ガーデン八潮（埼玉県 八潮市）。スロット形式 A（11 表）＋パチンコ（バラエティ含む、DMM リンクあり） |
 | `article-girlps-2026-09-13.html` | スロぱちガール来店PS。ピーアーク草加（埼玉県 草加市）。スロット形式 B（9 群）＋パチンコ「＜列①＞」接頭辞あり |
 | `article-station-2026-09-11.html` | スロパチステーション来店取材。ピーアーク草加。スロット形式 B のみ、2 機種混在見出しが 2 群、パチンコ無し |
-| `listing-kita-kanto-p1.html` | 北関東一覧 1 ページ目。40 行中 21 行にリンク。「(予定)」行あり。`a.next` あり |
+| `listing-kita-kanto-p1.html` | 北関東一覧 1 ページ目。40 行中 17 行にリンク、うち 2 行は「(予定)」付きリンク。`a.next` あり |
 
 ## ファイル構成
 
@@ -1265,8 +1265,8 @@ import { parseListing, inferVisitDate, AREAS } from '../src/listing';
 describe('parseListing', () => {
   const { entries, nextUrl } = parseListing(fixture('listing-kita-kanto-p1.html'));
 
-  it('リンクのある行だけを取る（40 行中 21 行）', () => {
-    expect(entries).toHaveLength(21);
+  it('リンクがあり (予定) でない行だけを取る（40 行中 リンク 17、(予定) 付きリンク 2 → 15 件）', () => {
+    expect(entries).toHaveLength(15);
   });
   it('先頭エントリの内容', () => {
     expect(entries[0]).toEqual({
