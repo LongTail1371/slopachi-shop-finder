@@ -470,6 +470,11 @@ export function toHalfWidth(s: string): string {
 export function extractBrackets(s: string): string[] {
   return [...s.matchAll(/【([^】]+)】/g)].map((m) => m[1]!.trim());
 }
+
+/** 四捨五入（0 から遠い側へ）。Math.round は -0.5 → -0 になるため使わない */
+export function roundHalfAwayFromZero(n: number): number {
+  return Math.sign(n) * Math.round(Math.abs(n));
+}
 ```
 
 注意: `toHalfWidth` の正規表現 `[！-～]` は全角の `！`(U+FF01) から `～`(U+FF5E) までの範囲。`～`(U+FF5E) は先に半角 `~` に変換されるため、続く置換で `〜` に統一される。
@@ -1028,7 +1033,7 @@ Expected: FAIL
 import type { Cheerio } from 'cheerio';
 import type { Element } from 'domhandler';
 import type { MachineResult } from '../../../shared/types';
-import { cleanText, extractBrackets, parseSignedInt } from '../text';
+import { cleanText, extractBrackets, parseSignedInt, roundHalfAwayFromZero } from '../text';
 import { isExcludedMachineName, machineKeyFor } from '../normalize';
 
 export function parseSlot(body: Cheerio<Element>): MachineResult[] {
@@ -1069,7 +1074,7 @@ function parseUnitTables(body: Cheerio<Element>): MachineResult[] {
     machineName: name,
     units: ds.length,
     plusUnits: ds.filter((d) => d > 0).length,
-    avgDiff: Math.round(ds.reduce((a, b) => a + b, 0) / ds.length),
+    avgDiff: roundHalfAwayFromZero(ds.reduce((a, b) => a + b, 0) / ds.length),
     unitNumbers: (units.get(name) ?? []).join(','),
   }));
 }
@@ -1692,6 +1697,7 @@ git commit -m "feat: データファイルの読み書きと 90 日 prune を追
 - Produces: `aggregate(articles: Article[]): MachineSummary[]`
   - 記事内で同じ `machineKey` が複数 `MachineResult` に分かれている場合（スロット形式 B の別群）は 1 件に統合: `units` 合計、`plusUnits` 合計、`avgDiff` は `units` 重み付き平均（四捨五入）、`shared` はいずれかが true なら true。
   - `ShopHit.hitCount` = 記事数、`avgDiffMean` = 記事ごとの統合 avgDiff の単純平均（四捨五入）、`plusRate` = Σplus/Σunits（小数第 3 位で丸め）。
+  - 四捨五入は Task 7 で text.ts に追加した `roundHalfAwayFromZero` を使う（`Math.round` は負の .5 を 0 側に丸めるため使わない）。
   - `shops` は `hitCount` 降順、同数は `lastVisitDate` 降順、さらに同じなら `storeName` 昇順。
   - `displayName` は最頻出の `machineName`（同数なら先に現れたもの）。`aliases` は他の表記（重複なし）。
   - `machines` は `hitCount` 降順、同数は `displayName` 昇順。
@@ -1779,6 +1785,7 @@ Expected: FAIL
 `crawler/src/aggregate.ts`
 ```ts
 import type { Article, Category, MachineResult, MachineSummary, ShopArticleRef, ShopHit } from '../../shared/types';
+import { roundHalfAwayFromZero } from './text';
 
 interface Merged {
   category: Category;
@@ -1807,7 +1814,7 @@ export function mergeWithinArticle(results: MachineResult[]): Map<string, Merged
       machineName: v.machineName,
       units: v.units,
       plusUnits: v.plus,
-      avgDiff: v.units > 0 ? Math.round(v.weighted / v.units) : 0,
+      avgDiff: v.units > 0 ? roundHalfAwayFromZero(v.weighted / v.units) : 0,
       ...(v.shared ? { shared: true as const } : {}),
     });
   }
@@ -1850,7 +1857,7 @@ export function aggregate(articles: Article[]): MachineSummary[] {
         storeName: s.storeName, prefecture: s.prefecture, city: s.city,
         hitCount: articlesDesc.length,
         lastVisitDate: articlesDesc[0]!.visitDate,
-        avgDiffMean: Math.round(articlesDesc.reduce((n, r) => n + r.avgDiff, 0) / articlesDesc.length),
+        avgDiffMean: roundHalfAwayFromZero(articlesDesc.reduce((n, r) => n + r.avgDiff, 0) / articlesDesc.length),
         plusRate: totalUnits > 0 ? Math.round((totalPlus / totalUnits) * 1000) / 1000 : 0,
         articles: articlesDesc,
       };
