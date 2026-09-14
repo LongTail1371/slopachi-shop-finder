@@ -106,6 +106,7 @@
 | `listing-kita-kanto-p1.html` | 北関東一覧 1 ページ目。40 行中 17 行にリンク、うち 2 行は「(予定)」付きリンク。`a.next` あり |
 | `article-akamaru-2026-09-11.html` | 東京あかまる来店取材。スロット形式 C（h4 見出し＋縦持ち表、台番なし）17 群。Task 20 で追加 |
 | `article-station-nopref-2026-09-10.html` | スロパチステーション来店取材。店舗情報表に地域行が無い。パチンコ 2 機種。Task 20 で追加 |
+| `article-girlps-noavg-2026-09-01.html` | スロぱちガール来店PS。平均差枚数・平均差玉数が掲載されない形式（スロット 11 群、パチンコ 12 見出し）。Task 21 で追加 |
 
 ## ファイル構成
 
@@ -3827,6 +3828,152 @@ Pages の URL をブラウザで開き、次を確認する:
 3. URL をコピーして別タブで開くと同じ状態が復元される
 
 問題がなければ完了。URL を README の冒頭に追記して `docs:` でコミット・push する。
+
+---
+
+### Task 21: 平均差枚・平均差玉が掲載されない記事への対応（avgDiff を null 許容にする）
+
+Task 19 の初回クロール（308 件）で 45 件（約 15%）が「機種結果が 0 件」で落ちた。原因は、店舗によっては差枚・差玉の平均を掲載しない記事形式があること。
+
+フィクスチャ `crawler/test/fixtures/article-girlps-noavg-2026-09-01.html`（スロぱちガール来店PS、FACE1100瑞穂、東京都 西多摩郡瑞穂町、訪問日 2026/09/01）:
+- スロット形式 B の縦持ち表が `プラス台 / 勝率 / 平均回転数` の 3 行のみで、`平均差枚数` 行が無い。見出しは 11 個（うち `【バラエティ 2278〜2282】` は除外対象、`【とある禁書目録2 2603,2605】【からくり2 2606,2607】` は 2 機種混在）→ 期待結果 11 件（10 見出し − バラエティ + 混在分 1）。先頭は `【東京喰種 1585〜1588】` プラス台 3台/4台。
+- パチンコセクションは `<pre>全22台中、13台がプラス（59%)</pre>` の 1 行のみで `平均差玉数` の pre が無い。h4 は 12 個（`＜列③＞【バラエティ】` は除外）→ 期待結果 11 件。先頭は `＜列①＞【東京喰種】` 全22台中13台。
+
+方針: 取材でピックアップされた事実（台数・プラス台数）は保存し、平均だけを「不明」として扱う。ランキングの主指標はピックアップ回数なので、平均が無くても価値がある。
+
+**Files:**
+- Modify: `shared/types.ts`（`MachineResult.avgDiff: number | null`、`ShopArticleRef.avgDiff: number | null`、`ShopHit.avgDiffMean: number | null`）
+- Modify: `crawler/src/parse/slot.ts`（形式 B/C で `平均差枚数` 行が無ければ `avgDiff: null`。`プラス台` 行は必須のまま）
+- Modify: `crawler/src/parse/pachinko.ts`（`平均差玉数` の pre が無ければ `avgDiff: null`。`全N台中、M台がプラス` は必須のまま）
+- Modify: `crawler/src/aggregate.ts`（記事内統合の重み付き平均は avgDiff が数値の結果だけで計算し、1 件も無ければ null。`avgDiffMean` も数値の記事だけの単純平均、無ければ null）
+- Modify: `web/src/lib/format.ts`（`formatDiff(n: number | null, category)`: null なら `'—'`）
+- Modify: `web/src/lib/rank.ts`（`rebuildShop` の avgDiffMean は数値のみで平均、無ければ null。`StoreMatch.machines[].avgDiffMean: number | null`）
+- Modify: `web/src/components/ShopRow.tsx`（セグメントは `avgDiff === null` なら `seg none`、`> 0` なら `seg plus`、それ以外 `seg minus`。平均の色クラスは null/0 で無し）
+- Modify: `web/src/components/ShopDetail.tsx`（null は `—` を表示、色クラス無し）
+- Modify: `web/src/components/StoreLookup.tsx`（`formatDiff` が null を受けるので変更不要なことを確認）
+- Modify: `web/src/styles/app.css`（`.seg.none { background: var(--rule); }` を追加）
+- Test: `crawler/test/slot.test.ts`, `crawler/test/pachinko.test.ts`, `crawler/test/article.test.ts`, `crawler/test/aggregate.test.ts`, `web/test/format.test.ts`, `web/test/rank.test.ts`, `web/test/ShopRow.test.tsx`（追記）
+
+**Interfaces:**
+- Consumes: 既存の全パーサ・集計・画面
+- Produces: 型の変更のみ。関数名・props 名は変えない
+
+- [ ] **Step 1: 失敗するテストを追記する**
+
+`crawler/test/slot.test.ts`:
+```ts
+describe('parseSlot 平均差枚数の無い記事', () => {
+  const { body } = loadBody(fixture('article-girlps-noavg-2026-09-01.html'));
+  const r = parseSlot(body);
+  it('11 件を読み、平均は null', () => {
+    expect(r).toHaveLength(11);
+    expect(r[0]).toEqual({
+      category: 'slot', machineKey: 'name:東京喰種', machineName: '東京喰種',
+      units: 4, plusUnits: 3, avgDiff: null, unitNumbers: '1585〜1588',
+    });
+    expect(r.every((x) => x.avgDiff === null)).toBe(true);
+  });
+  it('2 機種混在は shared 付きで両方入る', () => {
+    expect(r.filter((x) => x.shared)).toHaveLength(2);
+  });
+});
+```
+
+`crawler/test/pachinko.test.ts`:
+```ts
+  it('平均差玉数の無い記事は台数・プラス台だけ読み avgDiff は null', () => {
+    const { body } = loadBody(fixture('article-girlps-noavg-2026-09-01.html'));
+    const r = parsePachinko(body);
+    expect(r).toHaveLength(11);
+    expect(r[0]).toEqual({ category: 'pachinko', machineKey: expect.stringMatching(/^(dmm:\d+|name:.+)$/), machineName: '東京喰種', units: 22, plusUnits: 13, avgDiff: null });
+  });
+```
+
+`crawler/test/article.test.ts`:
+```ts
+  it('平均の無い記事も ok になり、店舗情報は表から取れる', () => {
+    const r = parseArticle(fixture('article-girlps-noavg-2026-09-01.html'), URL, AT);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.article.store).toEqual({ name: 'FACE1100瑞穂', prefecture: '東京都', city: '西多摩郡瑞穂町' });
+    expect(r.article.coverageType).toBe('スロぱちガール来店PS');
+    expect(r.article.results).toHaveLength(22);
+  });
+```
+（`store.name`/`city` の表記はフィクスチャの店舗情報表に従う。実装時に `parseStoreInfo` の実出力と食い違えば、フィクスチャの表記を正としてテストの文字列を直す。）
+
+`crawler/test/aggregate.test.ts`:
+```ts
+  it('平均が null の結果は平均計算から除き、全て null なら null', () => {
+    const out = aggregate([
+      art('u1', '2026-09-01', 'A店', [res('dmm:1', '北斗', 3, 2, null)]),
+      art('u2', '2026-09-02', 'A店', [res('dmm:1', '北斗', 2, 1, 1000)]),
+      art('u3', '2026-09-03', 'B店', [res('dmm:1', '北斗', 2, 2, null)]),
+    ]);
+    const a = out[0]!.shops.find((s) => s.storeName === 'A店')!;
+    expect(a.hitCount).toBe(2);
+    expect(a.avgDiffMean).toBe(1000);
+    expect(a.plusRate).toBe(0.6);
+    expect(out[0]!.shops.find((s) => s.storeName === 'B店')!.avgDiffMean).toBeNull();
+  });
+  it('記事内統合で null と数値が混ざれば数値側だけの重み付き平均', () => {
+    const out = aggregate([art('u1', '2026-09-01', 'A店', [
+      res('name:x', 'x', 4, 4, null, { category: 'slot' }),
+      res('name:x', 'x', 2, 1, 3000, { category: 'slot' }),
+    ])]);
+    expect(out[0]!.shops[0]!.articles[0]).toMatchObject({ units: 6, plusUnits: 5, avgDiff: 3000 });
+  });
+```
+（`res` ヘルパの `avgDiff` 引数型を `number | null` にする。）
+
+`web/test/format.test.ts`: `expect(formatDiff(null, 'pachinko')).toBe('—');`
+
+`web/test/rank.test.ts`: `shop()` ヘルパの `avg` を `number | null` にし、`filterShops` で取材種別を絞った結果 avg が全て null の店舗は `avgDiffMean` が null になるケースを 1 つ追加。
+
+`web/test/ShopRow.test.tsx`: articles に `avgDiff: null` の 1 件を加え、その `.seg` が `none` クラスを持ち、`plus`/`minus` を持たないこと、`avgDiffMean: null` の店舗で `—` が表示されることを追加。
+
+- [ ] **Step 2: 失敗を確認する**
+
+Run: `pnpm test`
+Expected: 型エラーまたはアサーション失敗
+
+- [ ] **Step 3: 型とクローラを直す**
+
+`shared/types.ts` の 3 箇所を `number | null` にする。
+
+`slot.ts` の形式 B/C（`parseGroupHeadings`）: `const avgDiff = parseSignedInt(rowValue('平均差枚数'));` の結果が null でも続行し、`avgDiff` にそのまま入れる。`plusM` が無い場合のみ return。形式 A（行ごとの差枚）は変更なし（差枚は常にある）。
+
+`pachinko.ts`: `if (!unitsM) return;` とし、`avgM` が無い、または `parseSignedInt` が null のときは `avgDiff: null`。
+
+`aggregate.ts` の `mergeWithinArticle`: `weighted` と `weightedUnits` を avgDiff が数値の結果だけで加算し、`avgDiff: weightedUnits > 0 ? roundHalfAwayFromZero(weighted / weightedUnits) : null`。`ShopHit.avgDiffMean`: `const known = articlesDesc.filter((r) => r.avgDiff !== null)` の平均、`known.length === 0` なら null。
+
+- [ ] **Step 4: 画面を直す**
+
+`format.ts`: `export function formatDiff(n: number | null, category: Category): string { if (n === null) return '—'; ... }`
+
+`rank.ts` の `rebuildShop`: 同じく数値のみで平均、無ければ null。`StoreMatch` の型を更新。
+
+`ShopRow.tsx`: セグメント `className={`seg ${a.avgDiff === null ? 'none' : a.avgDiff > 0 ? 'plus' : 'minus'}`}`、title は `formatDiff(a.avgDiff, category)`。`aria-label` のプラス件数は `avgDiff !== null && avgDiff > 0` で数える。平均 stat の色クラスは `shop.avgDiffMean !== null && shop.avgDiffMean > 0 ? 'plus' : shop.avgDiffMean !== null && shop.avgDiffMean < 0 ? 'minus' : ''`。
+
+`ShopDetail.tsx`: 同様に null は色クラス無しで `formatDiff` に任せる。
+
+`app.css`: `.seg.none { background: var(--rule); }`
+
+- [ ] **Step 5: 通ることを確認する**
+
+Run: `pnpm test && pnpm --filter crawler typecheck && pnpm --filter web build`
+Expected: 全 PASS
+
+- [ ] **Step 6: 実データで確認する**
+
+Run: `cd /Users/kohei/Developer/パチンコ系 && node -e "const e=require('./data/errors.json');console.log(e.length)"` で現在の失敗件数を記録し、`MAX_NEW_ARTICLES=60 pnpm crawl | tail -3` を 1 回実行。失敗 URL の再取得は 7 日間抑止される（Task 最終修正）ため、確認には `data/errors.json` を一時的に空配列 `[]` にしてから実行する。Expected: `機種結果が 0 件` が大幅に減る（残るのは本当に結果の無い記事のみ）。残った URL があれば 1 本取得して構造を報告する。
+
+- [ ] **Step 7: コミット（生成データは含めない。data/ が既にコミット済みなら、更新された data/*.json はこのタスクではコミットしない）**
+
+```bash
+git add shared/types.ts crawler/src crawler/test web/src web/test
+git commit -m "feat: 平均差枚・平均差玉が無い記事も台数とプラス台を保存する（avgDiff を null 許容）"
+```
 
 ---
 
