@@ -16,7 +16,7 @@ export function MachineSearch({ machines, category, query, onQueryChange, onSele
   const isBrowsing = query.trim() === '';
 
   return (
-    <section className="search" aria-labelledby={`${id}-label`}>
+    <section className="search">
       <label id={`${id}-label`} htmlFor={`${id}-input`} className="search-label">機種名で探す</label>
       <input
         id={`${id}-input`}

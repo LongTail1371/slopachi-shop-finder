@@ -12,7 +12,7 @@ interface Props {
 export function StoreLookup({ matches, query, onQueryChange, onSelectMachine }: Props) {
   const id = useId();
   return (
-    <section className="search" aria-labelledby={`${id}-label`}>
+    <section className="search">
       <label id={`${id}-label`} htmlFor={`${id}-input`} className="search-label">店舗名で探す</label>
       <input id={`${id}-input`} className="search-input" type="search" value={query} placeholder="例: 草加、マルハン" autoComplete="off"
              onChange={(e) => onQueryChange(e.target.value)} />
