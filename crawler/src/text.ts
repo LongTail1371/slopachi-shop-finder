@@ -1,13 +1,13 @@
 export function cleanText(s: string): string {
   return s
-    .replace(/ /g, ' ')
+    .replace(/\xa0/g, ' ')
     .replace(/　/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
 export function parseSignedInt(s: string): number | null {
-  const m = s.replace(/ /g, ' ').match(/([+\-−－]?)\s*([\d,，]+)/);
+  const m = s.replace(/\xa0/g, ' ').match(/([+\-−－]?)\s*([\d,，]+)/);
   if (!m) return null;
   const sign = m[1] && m[1] !== '+' ? -1 : 1;
   const digits = m[2]!.replace(/[,，]/g, '');

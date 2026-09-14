@@ -3,7 +3,7 @@ import { cleanText, parseSignedInt, toHalfWidth, extractBrackets } from '../src/
 
 describe('cleanText', () => {
   it('nbsp と全角空白と改行を 1 つの半角空白にする', () => {
-    expect(cleanText(' 店舗:  新！ガーデン八潮\n\t\t 八潮市　')).toBe('店舗: 新！ガーデン八潮 八潮市');
+    expect(cleanText('\xa0店舗:  新！ガーデン八潮\n\t\t\xa0八潮市　')).toBe('店舗: 新！ガーデン八潮 八潮市');
   });
 });
 
