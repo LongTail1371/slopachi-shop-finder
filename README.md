@@ -18,6 +18,14 @@ MAX_NEW_ARTICLES=20 pnpm crawl   # 新規 20 件まで取得して data/ を更�
 pnpm --filter web dev     # http://localhost:5173/
 ```
 
+## 初回セットアップの注意
+
+- GitHub Pages の Source を「GitHub Actions」にしてから、ワークフローを初回実行してください（Deploy from a branch のままだと公開されません）。
+- 初回クロールは 1 回あたり `MAX_NEW_ARTICLES`（既定 300 件）が上限です。直近 90 日分をまとめて取り込みたい場合は `pnpm crawl` を複数回実行するか、`MAX_NEW_ARTICLES` を大きくして実行してください（例: `MAX_NEW_ARTICLES=2000 pnpm crawl`）。
+- `VITE_BASE` はプロジェクトサイト（`https://<user>.github.io/<repo>/`）を前提にしています。ユーザー・組織サイト用リポジトリ（`<user>.github.io`）で使う場合は `/` にしてください。
+- 解析に失敗した記事は `data/errors.json` に記録され、7 日間は再取得されません（サイト側の HTML 構造が変わった場合、修正が反映されるまで再取得を試みないための挙動です）。7 日を過ぎると自動的に再取得されます。
+- CI では `pnpm test` に加えて `pnpm --filter crawler typecheck` も実行されます。型エラーがあるとデプロイは止まります。
+
 ## 注意
 
 - 取材データはスロパチステーションの著作物です。数値と元記事 URL のみ保存し、本文・画像は保存しません。私的利用の範囲で使ってください。
