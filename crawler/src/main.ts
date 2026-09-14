@@ -2,15 +2,16 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Article, CrawlError } from '../../shared/types';
 import { AREAS, inferVisitDate, parseListing, type ListingEntry } from './listing';
-import { parseArticle } from './parse/article';
+import { parseArticle, PARSE_FAILURE_REASONS } from './parse/article';
 import { createFetcher } from './fetch';
 import { aggregate } from './aggregate';
-import { cutoffDate, pruneOld, readArticles, writeArticles, writeErrors, writeMachines } from './store';
+import { cutoffDate, pruneOld, readArticles, readErrors, writeArticles, writeErrors, writeMachines } from './store';
 
 export const WINDOW_DAYS = 90;
 const DEFAULT_MAX_NEW = 300;
 const DEFAULT_MAX_PAGES = 60;
 const FAILURE_THRESHOLD = 10;
+export const PARSE_FAILURE_RETRY_DAYS = 7;
 
 export interface CrawlDeps {
   fetchHtml: (url: string) => Promise<string>;
@@ -22,7 +23,7 @@ export interface CrawlDeps {
   log: (msg: string) => void;
 }
 
-export interface CrawlResult { added: number; removed: number; errors: CrawlError[]; total: number }
+export interface CrawlResult { added: number; removed: number; errors: CrawlError[]; total: number; skipped: number }
 
 interface CollectedUrls { queue: string[]; areasOk: number }
 
@@ -61,6 +62,7 @@ async function collectNewUrls(deps: CrawlDeps, known: Set<string>, errors: Crawl
 
 export async function runCrawl(deps: CrawlDeps): Promise<CrawlResult> {
   const articlesPath = join(deps.dataDir, 'articles.json');
+  const errorsPath = join(deps.dataDir, 'errors.json');
   const errors: CrawlError[] = [];
 
   const existing = await readArticles(articlesPath);
@@ -68,12 +70,27 @@ export async function runCrawl(deps: CrawlDeps): Promise<CrawlResult> {
   const removed = existing.length - kept.length;
   const known = new Set(kept.map((a) => a.url));
 
+  // 直近 PARSE_FAILURE_RETRY_DAYS 日以内に解析失敗した URL は今回スキップし、
+  // 前回のエラー内容をそのまま繰り越す（無駄な再取得と失敗閾値への誤カウントを防ぐ）。
+  const previousErrors = await readErrors(errorsPath);
+  const parseFailureCutoff = cutoffDate(deps.today, PARSE_FAILURE_RETRY_DAYS);
+  const carried: CrawlError[] = [];
+  const skipUrls = new Set<string>();
+  for (const e of previousErrors) {
+    if (PARSE_FAILURE_REASONS.has(e.reason) && e.at.slice(0, 10) >= parseFailureCutoff) {
+      carried.push(e);
+      skipUrls.add(e.url);
+    }
+  }
+
   const { queue: rawQueue, areasOk } = await collectNewUrls(deps, known, errors);
   if (areasOk === 0) {
     throw new Error('全エリアの一覧取得に失敗しました');
   }
-  const queue = rawQueue.slice(0, deps.maxNewArticles ?? DEFAULT_MAX_NEW);
-  deps.log(`新規取得対象 ${queue.length} 件`);
+  const skippableQueue = rawQueue.filter((u) => !skipUrls.has(u));
+  const skipped = rawQueue.length - skippableQueue.length;
+  const queue = skippableQueue.slice(0, deps.maxNewArticles ?? DEFAULT_MAX_NEW);
+  deps.log(`新規取得対象 ${queue.length} 件（解析失敗のためスキップ ${skipped} 件）`);
 
   const added: Article[] = [];
   for (const url of queue) {
@@ -90,14 +107,14 @@ export async function runCrawl(deps: CrawlDeps): Promise<CrawlResult> {
   const all = pruneOld([...kept, ...added], deps.today, WINDOW_DAYS);
   const generatedAt = deps.nowIso();
   await writeArticles(articlesPath, all, generatedAt);
-  await writeErrors(join(deps.dataDir, 'errors.json'), errors);
+  await writeErrors(errorsPath, [...carried, ...errors]);
   await writeMachines(join(deps.dataDir, 'machines.json'), aggregate(all), generatedAt);
 
-  deps.log(`追加 ${added.length} / 削除 ${removed} / 失敗 ${errors.length} / 合計 ${all.length}`);
+  deps.log(`追加 ${added.length} / 削除 ${removed} / 失敗 ${errors.length}（繰越 ${carried.length}）/ 合計 ${all.length}`);
   if (added.length === 0 && errors.length >= FAILURE_THRESHOLD) {
     throw new Error(`解析失敗が多すぎます（${errors.length} 件）。サイト構造の変更を確認してください`);
   }
-  return { added: added.length, removed, errors, total: all.length };
+  return { added: added.length, removed, errors, total: all.length, skipped };
 }
 
 const isDirectRun = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];

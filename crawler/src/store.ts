@@ -27,6 +27,15 @@ export async function writeErrors(path: string, errors: CrawlError[]): Promise<v
   await writeJson(path, errors);
 }
 
+export async function readErrors(path: string): Promise<CrawlError[]> {
+  try {
+    return JSON.parse(await readFile(path, 'utf-8')) as CrawlError[];
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return [];
+    throw e;
+  }
+}
+
 export async function writeMachines(path: string, machines: MachineSummary[], generatedAt: string): Promise<void> {
   const file: MachinesFile = { generatedAt, windowDays: 90, machines };
   await writeJson(path, file);

@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fixture } from './helpers';
 import { runCrawl } from '../src/main';
-import { writeArticles } from '../src/store';
+import { writeArticles, writeErrors } from '../src/store';
+import { REASON_NO_RESULTS } from '../src/parse/article';
 
 const A1 = 'https://777.slopachi-station.com/a1/';
 const A2 = 'https://777.slopachi-station.com/a2/';
@@ -113,6 +114,44 @@ describe('runCrawl', () => {
     const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
     const { deps } = makeDeps({}, dir); // 3 エリアすべて 404
     await expect(runCrawl(deps)).rejects.toThrow('全エリアの一覧取得に失敗しました');
+  });
+
+  it('直近 7 日以内に解析失敗した URL は再取得せず errors.json に維持する', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
+    await writeErrors(join(dir, 'errors.json'), [{ url: A2, reason: REASON_NO_RESULTS, at: '2026-09-15T00:00:00.000Z' }]);
+    const { deps, fetched } = makeDeps(fakeSite(), dir);
+    const r = await runCrawl(deps);
+    expect(r.added).toBe(1);
+    expect(fetched).not.toContain(A2);
+    const errors = JSON.parse(await readFile(join(dir, 'errors.json'), 'utf-8'));
+    expect(errors).toContainEqual({ url: A2, reason: REASON_NO_RESULTS, at: '2026-09-15T00:00:00.000Z' });
+    expect(r.skipped).toBe(1);
+  });
+
+  it('7 日以上前の解析失敗 URL は再取得する', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
+    await writeErrors(join(dir, 'errors.json'), [{ url: A2, reason: REASON_NO_RESULTS, at: '2026-09-07T00:00:00.000Z' }]);
+    const { deps, fetched } = makeDeps(fakeSite(), dir);
+    await runCrawl(deps);
+    expect(fetched).toContain(A2);
+  });
+
+  it('繰越の解析失敗が 10 件あっても新規失敗 0 件なら例外にならない', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
+    const carried = Array.from({ length: 10 }, (_, i) => ({
+      url: `https://777.slopachi-station.com/old-fail-${i}/`, reason: REASON_NO_RESULTS, at: '2026-09-15T00:00:00.000Z',
+    }));
+    await writeErrors(join(dir, 'errors.json'), carried);
+    const site: Record<string, string> = {
+      'https://777.slopachi-station.com/report_pref/tokyo/': listingHtml([], null),
+      'https://777.slopachi-station.com/report/minami-kanto/': listingHtml([], null),
+      'https://777.slopachi-station.com/report/kita-kanto/': listingHtml([], null),
+    };
+    const { deps } = makeDeps(site, dir);
+    const r = await runCrawl(deps);
+    expect(r.added).toBe(0);
+    const errors = JSON.parse(await readFile(join(dir, 'errors.json'), 'utf-8'));
+    expect(errors).toHaveLength(10);
   });
 
   it('新規 0 件かつ解析失敗 10 件以上なら例外', async () => {

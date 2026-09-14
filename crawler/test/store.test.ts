@@ -3,7 +3,7 @@ import { mkdtemp, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import type { Article } from '../../shared/types';
-import { readArticles, writeArticles, pruneOld, cutoffDate, writeErrors } from '../src/store';
+import { readArticles, writeArticles, pruneOld, cutoffDate, writeErrors, readErrors } from '../src/store';
 
 function art(url: string, visitDate: string): Article {
   return {
@@ -34,6 +34,18 @@ describe('store', () => {
     const p = join(dir, 'errors.json');
     await writeErrors(p, [{ url: 'u', reason: 'r', at: 't' }]);
     expect(JSON.parse(await readFile(p, 'utf-8'))).toEqual([{ url: 'u', reason: 'r', at: 't' }]);
+  });
+
+  it('errors.json を書いて読める', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'store-'));
+    const p = join(dir, 'errors.json');
+    await writeErrors(p, [{ url: 'u', reason: 'r', at: 't' }]);
+    expect(await readErrors(p)).toEqual([{ url: 'u', reason: 'r', at: 't' }]);
+  });
+
+  it('無い errors.json は空配列', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'store-'));
+    expect(await readErrors(join(dir, 'none.json'))).toEqual([]);
   });
 });
 
