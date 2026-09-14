@@ -1,0 +1,11 @@
+{
+  "name": "slopachi-shop-finder",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "test": "pnpm -r test",
+    "crawl": "pnpm --filter crawler crawl",
+    "build": "pnpm --filter web build"
+  },
+  "engines": { "node": ">=24" }
+}

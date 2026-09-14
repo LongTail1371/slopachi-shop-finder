@@ -1,0 +1,20 @@
+{
+  "name": "crawler",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "crawl": "tsx src/main.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "domhandler": "^5.0.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
+}
