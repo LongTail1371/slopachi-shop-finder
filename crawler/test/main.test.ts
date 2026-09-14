@@ -109,6 +109,12 @@ describe('runCrawl', () => {
     expect(r.errors.some((e) => e.url.includes('report_pref/tokyo'))).toBe(true);
   });
 
+  it('全エリアの一覧取得に失敗したら例外', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
+    const { deps } = makeDeps({}, dir); // 3 エリアすべて 404
+    await expect(runCrawl(deps)).rejects.toThrow('全エリアの一覧取得に失敗しました');
+  });
+
   it('新規 0 件かつ解析失敗 10 件以上なら例外', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'crawl-'));
     const rows = Array.from({ length: 10 }, (_, i) => ({ md: '9/6', url: `https://777.slopachi-station.com/bad${i}/`, label: 'x' }));

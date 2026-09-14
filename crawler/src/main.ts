@@ -24,12 +24,15 @@ export interface CrawlDeps {
 
 export interface CrawlResult { added: number; removed: number; errors: CrawlError[]; total: number }
 
-async function collectNewUrls(deps: CrawlDeps, known: Set<string>, errors: CrawlError[]): Promise<string[]> {
+interface CollectedUrls { queue: string[]; areasOk: number }
+
+async function collectNewUrls(deps: CrawlDeps, known: Set<string>, errors: CrawlError[]): Promise<CollectedUrls> {
   const cutoff = cutoffDate(deps.today, WINDOW_DAYS);
   const today = new Date(`${deps.today}T00:00:00`);
   const maxPages = deps.maxPagesPerArea ?? DEFAULT_MAX_PAGES;
   const queue: string[] = [];
   const seen = new Set<string>();
+  let areasOk = 0;
 
   for (const area of AREAS) {
     let url: string | null = area.url;
@@ -43,6 +46,7 @@ async function collectNewUrls(deps: CrawlDeps, known: Set<string>, errors: Crawl
         deps.log(`一覧取得失敗: ${url}`);
         break;
       }
+      if (page === 0) areasOk++;
       const inWindow = entries.filter((e) => inferVisitDate(e.month, e.day, today) >= cutoff);
       for (const e of inWindow) {
         if (!known.has(e.url) && !seen.has(e.url)) { seen.add(e.url); queue.push(e.url); }
@@ -52,7 +56,7 @@ async function collectNewUrls(deps: CrawlDeps, known: Set<string>, errors: Crawl
       url = nextUrl;
     }
   }
-  return queue;
+  return { queue, areasOk };
 }
 
 export async function runCrawl(deps: CrawlDeps): Promise<CrawlResult> {
@@ -64,7 +68,11 @@ export async function runCrawl(deps: CrawlDeps): Promise<CrawlResult> {
   const removed = existing.length - kept.length;
   const known = new Set(kept.map((a) => a.url));
 
-  const queue = (await collectNewUrls(deps, known, errors)).slice(0, deps.maxNewArticles ?? DEFAULT_MAX_NEW);
+  const { queue: rawQueue, areasOk } = await collectNewUrls(deps, known, errors);
+  if (areasOk === 0) {
+    throw new Error('全エリアの一覧取得に失敗しました');
+  }
+  const queue = rawQueue.slice(0, deps.maxNewArticles ?? DEFAULT_MAX_NEW);
   deps.log(`新規取得対象 ${queue.length} 件`);
 
   const added: Article[] = [];
