@@ -1,1222 +1,6 @@
 {
-  "generatedAt": "2026-09-14T23:44:09.068Z",
+  "generatedAt": "2026-09-15T23:31:59.685Z",
   "articles": [
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%81%bf%e3%81%9a%e3%81%bb%e5%8f%b0uno%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s%ef%bc%81%e3%82%b9%e3%83%9e%e3%82%b9/",
-      "title": "【6月17日 みずほ台UNO】スロパチガール来店S！スマスロゴッドが平均差枚数+5,170枚と抜群の出玉感に！Aタイプやバラエティからも粘り腰のユーザーを確認した！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチガール来店S",
-      "store": {
-        "name": "みずほ台UNO",
-        "prefecture": "埼玉県",
-        "city": "富士見市"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロゴッド",
-          "machineName": "スマスロゴッド",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 5170,
-          "unitNumbers": "428〜431"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2900,
-          "unitNumbers": "329,330",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ北斗",
-          "machineName": "スマスロ北斗",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2900,
-          "unitNumbers": "331,332",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2390,
-          "unitNumbers": "536,537",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ゴージャグ3",
-          "machineName": "ゴージャグ3",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2390,
-          "unitNumbers": "538,539",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ネオアイム",
-          "machineName": "ネオアイム",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 870,
-          "unitNumbers": "503〜506"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 1140,
-          "unitNumbers": "564〜567"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ゴージャグ3",
-          "machineName": "ゴージャグ3",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 950,
-          "unitNumbers": "540〜543"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:48:18.631Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%82%bb%e3%83%96%e3%83%b3%ef%bd%93%e5%b7%9d%e5%b4%8e%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s%ef%bc%81sao2/",
-      "title": "【6月17日 セブンＳ川崎店】スロパチガール来店S！SAO2〜攻殻機動隊が平均差枚数+2,690枚！まだまだポテンシャルを秘めていそうな箇所が多数見受けられた！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチガール来店S",
-      "store": {
-        "name": "セブンＳ川崎店",
-        "prefecture": "神奈川県",
-        "city": "川崎市川崎区"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:沖ドキgold",
-          "machineName": "沖ドキGOLD",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 740,
-          "unitNumbers": "269〜272"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ化物語",
-          "machineName": "スマスロ化物語",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1440
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:乙女4",
-          "machineName": "乙女4",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1850,
-          "unitNumbers": "245",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ヴヴヴ2",
-          "machineName": "ヴヴヴ2",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1850,
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:sao2",
-          "machineName": "SAO2",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 2690,
-          "unitNumbers": "345,346",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:攻殻機動隊",
-          "machineName": "攻殻機動隊",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 2690,
-          "unitNumbers": "347,348",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:クレアbt",
-          "machineName": "クレアBT",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 900,
-          "unitNumbers": "383,384",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:アレックスブライト",
-          "machineName": "アレックスブライト",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 900,
-          "unitNumbers": "385,386",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ゴージャグ3",
-          "machineName": "ゴージャグ3",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 1230,
-          "unitNumbers": "536〜539"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 280,
-          "unitNumbers": "322,323",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 280,
-          "unitNumbers": "324,325",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スーパーブラックジャック",
-          "machineName": "スーパーブラックジャック",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 140,
-          "unitNumbers": "305〜308"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ネオアイム",
-          "machineName": "ネオアイム",
-          "units": 4,
-          "plusUnits": 1,
-          "avgDiff": -10,
-          "unitNumbers": "568〜571"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ネオアイム",
-          "machineName": "ネオアイム",
-          "units": 4,
-          "plusUnits": 0,
-          "avgDiff": -670,
-          "unitNumbers": "564〜567"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:47.250Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%83%9e%e3%83%ab%e3%83%8f%e3%83%b3%e5%8d%83%e8%91%89%e3%81%bf%e3%81%aa%e3%81%a8%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96/",
-      "title": "【6月17日 マルハン千葉みなと店】スロパチ来店取材！鉄拳6～シャーマンキングが平均差枚数+5,220枚に！パチンコでは東京喰種シリーズの人気の高さが窺えた！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチステーション来店取材",
-      "store": {
-        "name": "マルハン千葉みなと店",
-        "prefecture": "千葉県",
-        "city": "千葉市中央区"
-      },
-      "results": [
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4782",
-          "machineName": "東京喰種",
-          "units": 14,
-          "plusUnits": 6,
-          "avgDiff": 5750
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4846",
-          "machineName": "牙狼12黄金騎士極限",
-          "units": 11,
-          "plusUnits": 4,
-          "avgDiff": 690
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:5024",
-          "machineName": "東京喰種 超デカ超一撃ver.",
-          "units": 6,
-          "plusUnits": 2,
-          "avgDiff": -1010
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4897",
-          "machineName": "北斗の拳11 暴凶星",
-          "units": 9,
-          "plusUnits": 0,
-          "avgDiff": -10420
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:鉄拳6",
-          "machineName": "鉄拳6",
-          "units": 5,
-          "plusUnits": 5,
-          "avgDiff": 5220,
-          "unitNumbers": "844,845",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:シャーマンキング",
-          "machineName": "シャーマンキング",
-          "units": 5,
-          "plusUnits": 5,
-          "avgDiff": 5220,
-          "unitNumbers": "846〜848",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 6,
-          "plusUnits": 5,
-          "avgDiff": 4990,
-          "unitNumbers": "783〜788"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ北斗",
-          "machineName": "スマスロ北斗",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 3460,
-          "unitNumbers": "755,756",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:攻殻機動隊",
-          "machineName": "攻殻機動隊",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 3460,
-          "unitNumbers": "757",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ化物語",
-          "machineName": "スマスロ化物語",
-          "units": 5,
-          "plusUnits": 4,
-          "avgDiff": 3600
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マギレコ",
-          "machineName": "マギレコ",
-          "units": 5,
-          "plusUnits": 4,
-          "avgDiff": 2350
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:炎炎2",
-          "machineName": "炎炎2",
-          "units": 6,
-          "plusUnits": 5,
-          "avgDiff": 2790
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンキー5",
-          "machineName": "モンキー5",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 2850,
-          "unitNumbers": "796〜798"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:かぐや様",
-          "machineName": "かぐや様",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2100,
-          "unitNumbers": "769〜771"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:sao2",
-          "machineName": "SAO2",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2680
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:新鬼武者3",
-          "machineName": "新鬼武者3",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2150
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ドラハナ閃光",
-          "machineName": "ドラハナ閃光",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2040,
-          "unitNumbers": "1047〜1049"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:乙女5",
-          "machineName": "乙女5",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 2250,
-          "unitNumbers": "855〜857"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 1070,
-          "unitNumbers": "717〜719"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 1690,
-          "unitNumbers": "964〜967"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ファンキー2",
-          "machineName": "ファンキー2",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 1260,
-          "unitNumbers": "936〜938"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ゴージャグ3",
-          "machineName": "ゴージャグ3",
-          "units": 11,
-          "plusUnits": 8,
-          "avgDiff": 940
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 930,
-          "unitNumbers": "955〜957"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:42.600Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%83%9e%e3%83%ab%e3%83%8f%e3%83%b3%e5%8d%83%e8%91%89%e3%83%8b%e3%83%a5%e3%83%bc%e3%82%bf%e3%82%a6%e3%83%b3%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81/",
-      "title": "【6月17日 マルハン千葉ニュータウン店】スロパチ来店取材！乙女5が平均差枚数+6,060枚と素晴らしい結果に！パチンコでは東京喰種999の活躍が光った！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチステーション来店取材",
-      "store": {
-        "name": "マルハン千葉ニュータウン店",
-        "prefecture": "千葉県",
-        "city": "印西市"
-      },
-      "results": [
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:5024",
-          "machineName": "東京喰種 超デカ超一撃ver.",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 12970
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4932",
-          "machineName": "吉宗 極乗3000ver.",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 13150
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:5003",
-          "machineName": "バイオハザード6",
-          "units": 5,
-          "plusUnits": 2,
-          "avgDiff": 7530
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4982",
-          "machineName": "リコリス・リコイル",
-          "units": 4,
-          "plusUnits": 1,
-          "avgDiff": 8840
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:5021",
-          "machineName": "ソードアート・オンライン オルタナティブ ガンゲイル・オンライン",
-          "units": 1,
-          "plusUnits": 1,
-          "avgDiff": 15420
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4714",
-          "machineName": "押忍！番長 漢の頂",
-          "units": 2,
-          "plusUnits": 1,
-          "avgDiff": 7530
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4998",
-          "machineName": "学園黙示録ハイスクール・オブ・ザ・デッド3",
-          "units": 3,
-          "plusUnits": 1,
-          "avgDiff": 1740
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4958",
-          "machineName": "キン肉マン",
-          "units": 5,
-          "plusUnits": 3,
-          "avgDiff": 370
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4796",
-          "machineName": "東京リベンジャーズ",
-          "units": 3,
-          "plusUnits": 1,
-          "avgDiff": -7790
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:5013",
-          "machineName": "デッドマウント・デスプレイ 魂神9000",
-          "units": 3,
-          "plusUnits": 0,
-          "avgDiff": -9870
-        },
-        {
-          "category": "pachinko",
-          "machineKey": "dmm:4897",
-          "machineName": "北斗の拳11 暴凶星",
-          "units": 7,
-          "plusUnits": 2,
-          "avgDiff": -7570
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:銭形5",
-          "machineName": "銭形5",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 3430
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:乙女5",
-          "machineName": "乙女5",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 6060,
-          "unitNumbers": "463〜465"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:リオエース2",
-          "machineName": "リオエース2",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2590
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:エヴァ約束",
-          "machineName": "エヴァ約束",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2450
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ化物語",
-          "machineName": "スマスロ化物語",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 2320,
-          "unitNumbers": "417〜419"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:炎炎2",
-          "machineName": "炎炎2",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 510,
-          "unitNumbers": "423〜425"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 7,
-          "plusUnits": 3,
-          "avgDiff": 130,
-          "unitNumbers": "502〜508"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンキー5",
-          "machineName": "モンキー5",
-          "units": 3,
-          "plusUnits": 0,
-          "avgDiff": -2160,
-          "unitNumbers": "491〜493"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 240,
-          "unitNumbers": "572〜574"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:43.432Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%83%9e%e3%83%ab%e3%83%8f%e3%83%b3%e9%9d%92%e6%a2%85%e6%96%b0%e7%94%ba%e5%ba%97%e3%80%91%e6%9d%b1%e4%ba%ac%e3%81%82%e3%81%8b%e3%81%be%e3%82%8b%e6%9d%a5%e5%ba%97/",
-      "title": "【6月17日 マルハン青梅新町店】東京あかまる来店取材！東京喰種が平均差枚数+3,870枚と頭一つ抜けた出玉感に！番長ZEROやガールズSSなどメダル機も大活躍！",
-      "visitDate": "2026-06-17",
-      "coverageType": "東京あかまる来店取材",
-      "store": {
-        "name": "マルハン青梅新町店",
-        "prefecture": "東京都",
-        "city": "青梅市"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 25,
-          "plusUnits": 18,
-          "avgDiff": 3870
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:甲鉄城のカバネリ海門決戦",
-          "machineName": "甲鉄城のカバネリ 海門決戦",
-          "units": 21,
-          "plusUnits": 12,
-          "avgDiff": 1040
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:沖ドキ!black",
-          "machineName": "沖ドキ！BLACK",
-          "units": 9,
-          "plusUnits": 6,
-          "avgDiff": 1960
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:バジリスク〜甲賀忍法帖〜絆2天膳blackedition",
-          "machineName": "バジリスク～甲賀忍法帖～絆2 天膳 BLACK EDITION",
-          "units": 7,
-          "plusUnits": 5,
-          "avgDiff": 1590
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンスターハンターライズ",
-          "machineName": "モンスターハンターライズ",
-          "units": 8,
-          "plusUnits": 5,
-          "avgDiff": 1300
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マギアレコード魔法少女まどか☆マギカ外伝",
-          "machineName": "マギアレコード 魔法少女まどか☆マギカ外伝",
-          "units": 10,
-          "plusUnits": 6,
-          "avgDiff": 990
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:押忍!番長zero",
-          "machineName": "押忍！番長ZERO",
-          "units": 3,
-          "plusUnits": 3,
-          "avgDiff": 3270
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:新鬼武者3",
-          "machineName": "新鬼武者3",
-          "units": 7,
-          "plusUnits": 5,
-          "avgDiff": 1230
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:鉄拳6",
-          "machineName": "鉄拳6",
-          "units": 5,
-          "plusUnits": 4,
-          "avgDiff": 1300
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:とある科学の超電磁砲2",
-          "machineName": "とある科学の超電磁砲2",
-          "units": 2,
-          "plusUnits": 1,
-          "avgDiff": 3250
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:バイオハザードre:3",
-          "machineName": "バイオハザードRE:3",
-          "units": 7,
-          "plusUnits": 3,
-          "avgDiff": 710
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:頭文字d2nd",
-          "machineName": "頭文字D 2nd",
-          "units": 2,
-          "plusUnits": 1,
-          "avgDiff": 2150
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:aslot+ディスクアップultraremix",
-          "machineName": "A‐SLOT+ ディスクアップ ULTRAREMIX",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 1200
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:かぐや様は告らせたい",
-          "machineName": "かぐや様は告らせたい",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 850
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:無職転生〜異世界行ったら本気だす〜",
-          "machineName": "無職転生 ～異世界行ったら本気だす～",
-          "units": 3,
-          "plusUnits": 1,
-          "avgDiff": 1030
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:からくりサーカス",
-          "machineName": "からくりサーカス",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 750
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:アズールレーンtheanimation",
-          "machineName": "アズールレーン THE ANIMATION",
-          "units": 3,
-          "plusUnits": 1,
-          "avgDiff": 930
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ秘宝伝",
-          "machineName": "スマスロ秘宝伝",
-          "units": 3,
-          "plusUnits": 2,
-          "avgDiff": 900
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:少女☆歌劇レヴュースタァライトtheslot",
-          "machineName": "少女☆歌劇 レヴュースタァライト ‐The SLOT‐",
-          "units": 3,
-          "plusUnits": 1,
-          "avgDiff": 630
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:戦国乙女5業火を穿つ宿焔の双刃",
-          "machineName": "戦国乙女5 業火を穿つ宿焔の双刃",
-          "units": 13,
-          "plusUnits": 5,
-          "avgDiff": -380
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグラーv",
-          "machineName": "マイジャグラーV",
-          "units": 36,
-          "plusUnits": 25,
-          "avgDiff": 620
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ジャグラーガールズss",
-          "machineName": "ジャグラーガールズSS",
-          "units": 8,
-          "plusUnits": 7,
-          "avgDiff": 1630
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:キングハナハナ",
-          "machineName": "キングハナハナ",
-          "units": 10,
-          "plusUnits": 2,
-          "avgDiff": -150
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:05:57.271Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-%e3%83%a1%e3%82%ac%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b91180%e5%ba%a7%e9%96%93%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5-3/",
-      "title": "【6月17日 メガフェイス1180座間店】スロパチガール来店S！マイジャグ5が平均差枚数+2,650枚を記録！更なるポテンシャルを引き出せそうな箇所も見られた！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチガール来店S",
-      "store": {
-        "name": "メガフェイス1180座間店",
-        "prefecture": "神奈川県",
-        "city": "座間市"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:バジ絆2天膳",
-          "machineName": "バジ絆2天膳",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2880,
-          "unitNumbers": "987,988",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スーパーブラックジャック",
-          "machineName": "スーパーブラックジャック",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2880,
-          "unitNumbers": "989,990",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:チバリヨ2",
-          "machineName": "チバリヨ2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2910,
-          "unitNumbers": "1077〜1080"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンキー5",
-          "machineName": "モンキー5",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2680,
-          "unitNumbers": "703〜706"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ヴヴヴ2",
-          "machineName": "ヴヴヴ2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2590,
-          "unitNumbers": "341〜344"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:リオエース2",
-          "machineName": "リオエース2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 1910,
-          "unitNumbers": "286〜289"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:攻殻機動隊",
-          "machineName": "攻殻機動隊",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2520,
-          "unitNumbers": "941〜944"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:北斗転生2",
-          "machineName": "北斗転生2",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 2040,
-          "unitNumbers": "745〜748"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンキー5",
-          "machineName": "モンキー5",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1610,
-          "unitNumbers": "716〜719"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:バイオre3",
-          "machineName": "バイオRE3",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1460,
-          "unitNumbers": "361〜364"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:リオエース2",
-          "machineName": "リオエース2",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1250,
-          "unitNumbers": "290〜293"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:沖ドキblack",
-          "machineName": "沖ドキBLACK",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1350,
-          "unitNumbers": "1137〜1140"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:北斗転生2",
-          "machineName": "北斗転生2",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2070,
-          "unitNumbers": "756〜759"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 1900,
-          "unitNumbers": "626〜629"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:沖ドキゴージャス",
-          "machineName": "沖ドキゴージャス",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1420,
-          "unitNumbers": "1098〜1101"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1680,
-          "unitNumbers": "775〜778"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 1420,
-          "unitNumbers": "1045〜1048"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:マイジャグ5",
-          "machineName": "マイジャグ5",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 2650,
-          "unitNumbers": "799〜802"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:52.960Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-pia%e4%ba%ac%e6%80%a5%e5%b7%9d%e5%b4%8e%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s%ef%bc%81%e5%8c%97%e6%96%97%e8%bb%a2/",
-      "title": "【6月17日 PIA京急川崎】スロパチガール来店S！北斗転生2が平均差枚数+8,510枚と驚きの出玉感を記録！その他にも素晴らしい結果がユーザーを魅了した！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチガール来店S",
-      "store": {
-        "name": "PIA京急川崎",
-        "prefecture": "神奈川県",
-        "city": "川崎市川崎区"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:乙女4",
-          "machineName": "乙女4",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 8030,
-          "unitNumbers": "2210,2211",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:乙女5",
-          "machineName": "乙女5",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 8030,
-          "unitNumbers": "2212,2213",
-          "shared": true
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:北斗転生2",
-          "machineName": "北斗転生2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 8510,
-          "unitNumbers": "2028〜2031"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 5300,
-          "unitNumbers": "2005〜2008"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:北斗転生2",
-          "machineName": "北斗転生2",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 4580,
-          "unitNumbers": "2039〜2042"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 4210,
-          "unitNumbers": "2009〜2012"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロゴッド",
-          "machineName": "スマスロゴッド",
-          "units": 4,
-          "plusUnits": 2,
-          "avgDiff": 2830
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:真打吉宗",
-          "machineName": "真打吉宗",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 1940,
-          "unitNumbers": "2054〜2057"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:51.425Z"
-    },
-    {
-      "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8817%e6%97%a5-pia%e6%b4%a5%e7%94%b0%e6%b2%bc%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s%ef%bc%81%e6%9d%b1%e4%ba%ac%e5%96%b0%e7%a8%ae/",
-      "title": "【6月17日 PIA津田沼】スロパチガール来店S！東京喰種が平均差枚数+6,300枚と大熱狂！ピックアップ箇所全てが抜群の出玉感を誇り、満足度の高い結果となった！",
-      "visitDate": "2026-06-17",
-      "coverageType": "スロパチガール来店S",
-      "store": {
-        "name": "PIA津田沼",
-        "prefecture": "千葉県",
-        "city": "習志野市"
-      },
-      "results": [
-        {
-          "category": "slot",
-          "machineKey": "name:ヴヴヴ2",
-          "machineName": "ヴヴヴ2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 5600,
-          "unitNumbers": "2269〜2272"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロゴッド",
-          "machineName": "スマスロゴッド",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 5860,
-          "unitNumbers": "3015〜3018"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 6300,
-          "unitNumbers": "2184〜2187"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:北斗転生2",
-          "machineName": "北斗転生2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 4150,
-          "unitNumbers": "3033〜3036"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 4800,
-          "unitNumbers": "2083〜2086"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンハンライズ",
-          "machineName": "モンハンライズ",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 4890,
-          "unitNumbers": "2109〜2112"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:スマスロ北斗",
-          "machineName": "スマスロ北斗",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 3200,
-          "unitNumbers": "2257〜2260"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:ウルミラ",
-          "machineName": "ウルミラ",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 3660,
-          "unitNumbers": "3150〜3153"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:東京喰種",
-          "machineName": "東京喰種",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 4050,
-          "unitNumbers": "2189〜2192"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:リオエース2",
-          "machineName": "リオエース2",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2360,
-          "unitNumbers": "2051〜2054"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:モンキー5",
-          "machineName": "モンキー5",
-          "units": 4,
-          "plusUnits": 3,
-          "avgDiff": 2240,
-          "unitNumbers": "2165〜2168"
-        },
-        {
-          "category": "slot",
-          "machineKey": "name:カバネリ海門決戦",
-          "machineName": "カバネリ海門決戦",
-          "units": 4,
-          "plusUnits": 4,
-          "avgDiff": 1950,
-          "unitNumbers": "2097〜2100"
-        }
-      ],
-      "fetchedAt": "2026-09-14T18:33:49.493Z"
-    },
     {
       "url": "https://777.slopachi-station.com/%e3%80%906%e6%9c%8818%e6%97%a5-%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%ad%e3%82%b3%e3%83%bc%e3%83%8a%e7%9b%b8%e6%a8%a1%e5%8e%9f%e3%80%91%e3%81%99%e3%82%8d%e3%81%b1%e3%81%a1%e3%82%ac%e3%83%bc%e3%83%ab/",
       "title": "【6月18日 グランキコーナ相模原】すろぱちガール来店P！エヴァ約束や東京喰種など、どの列も大盛況に！状況の良さを存分に活かした出玉感を確認できた！",
@@ -146476,6 +145260,182 @@
       "fetchedAt": "2026-09-14T18:06:08.957Z"
     },
     {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%82%b4%e3%83%bc%e3%83%89%e3%83%b3%e8%a5%bf%e5%b7%9d%e5%8f%a3%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%81%b1%e3%81%a1%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97ps/",
+      "title": "【9月11日 ゴードン西川口店】スロぱちガール来店PS！SAO2～真打吉宗が平均差枚数+3,630枚をマーク！パチンコでは東京喰種が頭一つ抜けた出玉感を叩き出した！",
+      "visitDate": "2026-09-11",
+      "coverageType": "スロぱちガール来店PS",
+      "store": {
+        "name": "ゴードン西川口店",
+        "prefecture": "埼玉県",
+        "city": "川口市"
+      },
+      "results": [
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4782",
+          "machineName": "東京喰種",
+          "units": 8,
+          "plusUnits": 7,
+          "avgDiff": 15460
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4897",
+          "machineName": "北斗の拳11 暴凶星",
+          "units": 8,
+          "plusUnits": 3,
+          "avgDiff": 3010
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4897",
+          "machineName": "北斗の拳11 暴凶星",
+          "units": 8,
+          "plusUnits": 4,
+          "avgDiff": 2600
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4857",
+          "machineName": "スーパー海物語IN沖縄6",
+          "units": 8,
+          "plusUnits": 4,
+          "avgDiff": 1080
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:sao2",
+          "machineName": "SAO2",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 3630,
+          "unitNumbers": "637〜639",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:真打吉宗",
+          "machineName": "真打吉宗",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 3630,
+          "unitNumbers": "640",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 3280,
+          "unitNumbers": "574〜577"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:かのかり",
+          "machineName": "かのかり",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 3000,
+          "unitNumbers": "509,510",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:やじきた参る",
+          "machineName": "やじきた参る",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 3000,
+          "unitNumbers": "511,512",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:炎炎2",
+          "machineName": "炎炎2",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 2580,
+          "unitNumbers": "542〜545"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:乙女5",
+          "machineName": "乙女5",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 2040,
+          "unitNumbers": "665〜668"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ネオアイム",
+          "machineName": "ネオアイム",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 1430,
+          "unitNumbers": "673〜676"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ゴージャグ3",
+          "machineName": "ゴージャグ3",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 950,
+          "unitNumbers": "753〜756"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 680,
+          "unitNumbers": "499〜502"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:リコリコ",
+          "machineName": "リコリコ",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 300,
+          "unitNumbers": "728〜731"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:タコスロ",
+          "machineName": "タコスロ",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 250,
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロハナビ",
+          "machineName": "スマスロハナビ",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 250,
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:マイジャグ5",
+          "machineName": "マイジャグ5",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 20,
+          "unitNumbers": "762〜765"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:58.385Z"
+    },
+    {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%82%b8%e3%82%a2%e3%82%b9%e3%82%bb%e3%83%b3%e3%82%bf%e3%83%bc%e5%8d%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s/",
       "title": "【9月11日 ジアスセンター南】スロパチガール来店S！カバネリ海門決戦が圧巻の平均差枚数+5,310枚に！高稼働に比例して大きな出玉感を獲得する箇所が散見された！",
       "visitDate": "2026-09-11",
@@ -146589,6 +145549,220 @@
         }
       ],
       "fetchedAt": "2026-09-14T18:06:11.724Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%83%94%e3%83%bc%e3%82%a2%e3%83%bc%e3%82%af%e5%8c%97%e7%b6%be%e7%80%ac%e9%a7%85%e5%89%8d%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96/",
+      "title": "【9月11日 ピーアーク北綾瀬駅前】スロパチ来店取材！東京喰種が驚愕の平均差枚数+11,540枚を記録！パチンコも東京喰種が終日フル稼働と大人気であった！",
+      "visitDate": "2026-09-11",
+      "coverageType": "スロパチステーション来店取材",
+      "store": {
+        "name": "ピーアーク北綾瀬駅前",
+        "prefecture": "東京都",
+        "city": ""
+      },
+      "results": [
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4782",
+          "machineName": "東京喰種",
+          "units": 40,
+          "plusUnits": 26,
+          "avgDiff": 6690
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 11540,
+          "unitNumbers": "47〜49"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 6510,
+          "unitNumbers": "21〜23"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 4010,
+          "unitNumbers": "146〜148"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ヴヴヴ",
+          "machineName": "ヴヴヴ",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 3730,
+          "unitNumbers": "1075〜1077"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 2590,
+          "unitNumbers": "132〜134"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 6,
+          "plusUnits": 3,
+          "avgDiff": 2010,
+          "unitNumbers": "62〜67"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:真打吉宗",
+          "machineName": "真打吉宗",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 1810,
+          "unitNumbers": "348〜350"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 1360,
+          "unitNumbers": "110〜112"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ヴヴヴ2",
+          "machineName": "ヴヴヴ2",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": 680,
+          "unitNumbers": "1069〜1071"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:南国育ちsp",
+          "machineName": "南国育ちSP",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": 0
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:バイオre3",
+          "machineName": "バイオRE3",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": -230,
+          "unitNumbers": "424,425",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:モンキー5",
+          "machineName": "モンキー5",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": -230,
+          "unitNumbers": "426",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロゴッド",
+          "machineName": "スマスロゴッド",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": -270,
+          "unitNumbers": "1028〜1030"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:乙女5",
+          "machineName": "乙女5",
+          "units": 3,
+          "plusUnits": 0,
+          "avgDiff": -810,
+          "unitNumbers": "393〜395"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:攻殻機動隊",
+          "machineName": "攻殻機動隊",
+          "units": 3,
+          "plusUnits": 0,
+          "avgDiff": -2730,
+          "unitNumbers": "514,515",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:炎炎2",
+          "machineName": "炎炎2",
+          "units": 3,
+          "plusUnits": 0,
+          "avgDiff": -2730,
+          "unitNumbers": "516",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ゴージャグ3",
+          "machineName": "ゴージャグ3",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 2060,
+          "unitNumbers": "155〜157"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:マイジャグ5",
+          "machineName": "マイジャグ5",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 1710,
+          "unitNumbers": "327〜329"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ゴージャグ3",
+          "machineName": "ゴージャグ3",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 180,
+          "unitNumbers": "245〜247"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ゴージャグ3",
+          "machineName": "ゴージャグ3",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": 140,
+          "unitNumbers": "233〜235"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ファンキー2",
+          "machineName": "ファンキー2",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": -40,
+          "unitNumbers": "301〜303"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:54.180Z"
     },
     {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%83%94%e3%83%bc%e3%82%a2%e3%83%bc%e3%82%af%e5%8d%83%e8%91%89%e9%a7%85%e5%89%8d%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96%e6%9d%90/",
@@ -146785,6 +145959,98 @@
         }
       ],
       "fetchedAt": "2026-09-14T18:06:10.280Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%83%94%e3%83%bc%e3%82%a2%e3%83%bc%e3%82%af%e6%9d%be%e5%8e%9f%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e3%82%ac%e3%83%bc%e3%83%ab%e6%9d%a5%e5%ba%97s%ef%bc%81-2/",
+      "title": "【9月11日 ピーアーク松原】スロパチガール来店S！カバネリ海門決戦～スマスロ北斗が平均差枚数+3,570枚と申し分ない出玉感に！また東京喰種も絶好調となった！",
+      "visitDate": "2026-09-11",
+      "coverageType": "スロパチガール来店S",
+      "store": {
+        "name": "ピーアーク松原",
+        "prefecture": "埼玉県",
+        "city": "草加市"
+      },
+      "results": [
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 3570,
+          "unitNumbers": "598,599",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロ北斗",
+          "machineName": "スマスロ北斗",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 3570,
+          "unitNumbers": "600,601",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 3140,
+          "unitNumbers": "629〜632"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:sao2",
+          "machineName": "SAO2",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 2030,
+          "unitNumbers": "688,689",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:真打吉宗",
+          "machineName": "真打吉宗",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 2030,
+          "unitNumbers": "690,691",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロゴッド",
+          "machineName": "スマスロゴッド",
+          "units": 4,
+          "plusUnits": 1,
+          "avgDiff": 1900,
+          "unitNumbers": "673,674",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:からくり2",
+          "machineName": "からくり2",
+          "units": 4,
+          "plusUnits": 1,
+          "avgDiff": 1900,
+          "unitNumbers": "675,676",
+          "shared": true
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ファンキー2",
+          "machineName": "ファンキー2",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 1540,
+          "unitNumbers": "571〜574"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:59.673Z"
     },
     {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-%e3%83%94%e3%83%bc%e3%82%a2%e3%83%bc%e3%82%af%e8%8d%89%e5%8a%a0%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96%e6%9d%90%ef%bc%81%e6%9d%b1/",
@@ -147291,6 +146557,307 @@
         }
       ],
       "fetchedAt": "2026-09-14T17:33:58.057Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8811%e6%97%a5-super-dstation%e9%8c%a6%e7%b3%b8%e7%94%ba%e5%ba%97%e3%80%91%e5%88%9d%e3%82%8b%e3%81%84%e3%81%b9%e3%81%88%e5%ae%9f%e8%b7%b5%e6%9d%a5%e5%ba%97%ef%bc%81%e6%9d%b1%e4%ba%ac/",
+      "title": "【9月11日 Super D’station錦糸町店】初るいべえ実践来店！東京リベンジャーズ〜スマスロ化物語など機種跨ぎ箇所が活躍！パチンコではエヴァ咆哮が存在感を放った！",
+      "visitDate": "2026-09-11",
+      "coverageType": "るいべえ実践来店",
+      "store": {
+        "name": "Super D'station錦糸町店",
+        "prefecture": "東京都",
+        "city": "墨田区"
+      },
+      "results": [
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4021",
+          "machineName": "新世紀エヴァンゲリオン～未来への咆哮～",
+          "units": 15,
+          "plusUnits": 11,
+          "avgDiff": 12330
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4894",
+          "machineName": "新世紀エヴァンゲリオン ～はじまりの記憶～",
+          "units": 21,
+          "plusUnits": 9,
+          "avgDiff": 5190
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4782",
+          "machineName": "東京喰種",
+          "units": 38,
+          "plusUnits": 18,
+          "avgDiff": 3030
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ゴージャグ3",
+          "machineName": "ゴージャグ3",
+          "units": 6,
+          "plusUnits": 4,
+          "avgDiff": 577,
+          "unitNumbers": "650,651,652,653,654,655"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:とんスキ",
+          "machineName": "とんスキ",
+          "units": 2,
+          "plusUnits": 1,
+          "avgDiff": 275,
+          "unitNumbers": "767,768"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:マギレコ",
+          "machineName": "マギレコ",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": 417,
+          "unitNumbers": "769,770,771"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:鉄拳6",
+          "machineName": "鉄拳6",
+          "units": 1,
+          "plusUnits": 1,
+          "avgDiff": 8780,
+          "unitNumbers": "772"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:かのかり",
+          "machineName": "かのかり",
+          "units": 5,
+          "plusUnits": 1,
+          "avgDiff": -472,
+          "unitNumbers": "809,810,811,812,813"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:炎炎2",
+          "machineName": "炎炎2",
+          "units": 1,
+          "plusUnits": 1,
+          "avgDiff": 4070,
+          "unitNumbers": "814"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 6,
+          "plusUnits": 5,
+          "avgDiff": 3372,
+          "unitNumbers": "847,848,849,850,851,852"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:からくりサーカス",
+          "machineName": "からくりサーカス",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 2460,
+          "unitNumbers": "878,879,880,881"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ヴヴヴ2",
+          "machineName": "ヴヴヴ2",
+          "units": 2,
+          "plusUnits": 0,
+          "avgDiff": -945,
+          "unitNumbers": "882,883"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:喰霊零re",
+          "machineName": "喰霊零Re",
+          "units": 1,
+          "plusUnits": 1,
+          "avgDiff": 2400,
+          "unitNumbers": "955"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:邪神ちゃん",
+          "machineName": "邪神ちゃん",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 2743,
+          "unitNumbers": "956,957,958"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ワーダイ",
+          "machineName": "ワーダイ",
+          "units": 2,
+          "plusUnits": 1,
+          "avgDiff": 3420,
+          "unitNumbers": "959,960"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京リベンジャーズ",
+          "machineName": "東京リベンジャーズ",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 3387,
+          "unitNumbers": "969,970,971"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロ化物語",
+          "machineName": "スマスロ化物語",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 5113,
+          "unitNumbers": "972,973,974"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:52.543Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8812%e6%97%a5-%e3%82%a8%e3%82%af%e3%82%b9%e3%83%bb%e3%82%a2%e3%83%aa%e3%83%bc%e3%83%8a-%e6%9d%b1%e4%ba%ac%e3%80%91%e3%82%8b%e3%81%84%e3%81%b9%e3%81%88%e5%ae%9f%e8%b7%b5%e6%9d%a5/",
+      "title": "【9月12日 エクス・アリーナ 東京】るいべえ実践来店！やじきた参る〜シャーマンキングが凄まじい出玉感を記録！パチンコではどちらのボックスも高稼働であった！",
+      "visitDate": "2026-09-12",
+      "coverageType": "るいべえ実践来店",
+      "store": {
+        "name": "エクス・アリーナ 東京",
+        "prefecture": "東京都",
+        "city": ""
+      },
+      "results": [
+        {
+          "category": "pachinko",
+          "machineKey": "name:新世紀エヴァンゲリオン〜はじまりの記憶〜",
+          "machineName": "新世紀エヴァンゲリオン ～はじまりの記憶～",
+          "units": 15,
+          "plusUnits": 8,
+          "avgDiff": 9300
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:5045",
+          "machineName": "機動戦士ガンダムSEED クライマックス",
+          "units": 15,
+          "plusUnits": 9,
+          "avgDiff": 8210
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4782",
+          "machineName": "東京喰種",
+          "units": 30,
+          "plusUnits": 15,
+          "avgDiff": 8110
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:タコスロ",
+          "machineName": "タコスロ",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 2200,
+          "unitNumbers": "661,662,663"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロハナビ",
+          "machineName": "スマスロハナビ",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 2307,
+          "unitNumbers": "664,665,666"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:マギレコ",
+          "machineName": "マギレコ",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 3610,
+          "unitNumbers": "680,681,682,683"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:モンキー5",
+          "machineName": "モンキー5",
+          "units": 8,
+          "plusUnits": 7,
+          "avgDiff": 2128,
+          "unitNumbers": "684,685,691,692,693,694,695,696"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:やじきた参る",
+          "machineName": "やじきた参る",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 3530,
+          "unitNumbers": "725,726,727"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:シャーマンキング",
+          "machineName": "シャーマンキング",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 4067,
+          "unitNumbers": "728,729,730"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:沖ドキduo2",
+          "machineName": "沖ドキDUO2",
+          "units": 6,
+          "plusUnits": 4,
+          "avgDiff": 3107,
+          "unitNumbers": "864,865,866,867,868,869"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 6,
+          "plusUnits": 5,
+          "avgDiff": 3748,
+          "unitNumbers": "916,917,918,919,920,921"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ファンキー2",
+          "machineName": "ファンキー2",
+          "units": 6,
+          "plusUnits": 5,
+          "avgDiff": 1885,
+          "unitNumbers": "1003,1004,1005,1006,1007,1008"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロゴッド",
+          "machineName": "スマスロゴッド",
+          "units": 6,
+          "plusUnits": 3,
+          "avgDiff": 2218,
+          "unitNumbers": "1070,1071,1072,1073,1074,1075"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 6,
+          "plusUnits": 4,
+          "avgDiff": 2715,
+          "unitNumbers": "1163,1164,1165,1166,1167,1168"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:51.415Z"
     },
     {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8812%e6%97%a5-%e3%82%a8%e3%82%af%e3%82%b9%e3%83%bb%e3%82%a2%e3%83%aa%e3%83%bc%e3%83%8a-%e6%9f%8f%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96/",
@@ -148183,6 +147750,139 @@
       "fetchedAt": "2026-09-14T17:33:55.023Z"
     },
     {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8813%e6%97%a5-%e3%82%a8%e3%82%af%e3%82%b9%e3%83%bb%e3%82%a2%e3%83%aa%e3%83%bc%e3%83%8a-%e6%9d%b1%e4%ba%ac%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96/",
+      "title": "【9月13日 エクス・アリーナ 東京】スロパチ来店取材！エヴァ記憶が平均差玉数+8,070玉を記録！各所から粘り腰のユーザーを多数確認することができた！",
+      "visitDate": "2026-09-13",
+      "coverageType": "スロパチステーション来店取材",
+      "store": {
+        "name": "エクス・アリーナ 東京",
+        "prefecture": "東京都",
+        "city": ""
+      },
+      "results": [
+        {
+          "category": "pachinko",
+          "machineKey": "name:新世紀エヴァンゲリオン〜はじまりの記憶〜",
+          "machineName": "新世紀エヴァンゲリオン ～はじまりの記憶～",
+          "units": 15,
+          "plusUnits": 10,
+          "avgDiff": 8070
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:5045",
+          "machineName": "機動戦士ガンダムSEED クライマックス",
+          "units": 15,
+          "plusUnits": 7,
+          "avgDiff": 3470
+        },
+        {
+          "category": "pachinko",
+          "machineKey": "dmm:4782",
+          "machineName": "東京喰種",
+          "units": 30,
+          "plusUnits": 18,
+          "avgDiff": 5750
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:50.105Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8813%e6%97%a5-%e3%82%a8%e3%82%af%e3%82%b9%e3%83%bb%e3%82%a2%e3%83%aa%e3%83%bc%e3%83%8a-%e6%9f%8f%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96-3/",
+      "title": "【9月13日 エクス・アリーナ 柏店】スロパチ来店取材！カバネリ海門決戦が好調さをアピール！優秀な状況も相まってスマスロを中心に稼働の高さが目立っていた！",
+      "visitDate": "2026-09-13",
+      "coverageType": "スロパチステーション来店取材",
+      "store": {
+        "name": "エクス・アリーナ 柏店",
+        "prefecture": "千葉県",
+        "city": "柏市"
+      },
+      "results": [
+        {
+          "category": "slot",
+          "machineKey": "name:沖ドキblack",
+          "machineName": "沖ドキBLACK",
+          "units": 6,
+          "plusUnits": 6,
+          "avgDiff": 1528,
+          "unitNumbers": "375,376,377,378,379,380"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:タコスロ",
+          "machineName": "タコスロ",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 393,
+          "unitNumbers": "430,431,432"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロサンダーv",
+          "machineName": "スマスロサンダーV",
+          "units": 3,
+          "plusUnits": 3,
+          "avgDiff": 1347,
+          "unitNumbers": "433,434,435"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:リコリコ",
+          "machineName": "リコリコ",
+          "units": 6,
+          "plusUnits": 4,
+          "avgDiff": 2400,
+          "unitNumbers": "471,472,473,474,475,476"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 7,
+          "plusUnits": 6,
+          "avgDiff": 3489,
+          "unitNumbers": "507,508,509,510,511,512,513"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:攻殻機動隊",
+          "machineName": "攻殻機動隊",
+          "units": 5,
+          "plusUnits": 3,
+          "avgDiff": 1232,
+          "unitNumbers": "514,515,516,517,518"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:とある禁書目録2",
+          "machineName": "とある禁書目録2",
+          "units": 3,
+          "plusUnits": 1,
+          "avgDiff": 663,
+          "unitNumbers": "561,562,563"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:かのかり",
+          "machineName": "かのかり",
+          "units": 3,
+          "plusUnits": 2,
+          "avgDiff": 4693,
+          "unitNumbers": "564,565,566"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:モンキー5",
+          "machineName": "モンキー5",
+          "units": 6,
+          "plusUnits": 4,
+          "avgDiff": 1790,
+          "unitNumbers": "586,587,588,589,590,591"
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:56.319Z"
+    },
+    {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8813%e6%97%a5-%e3%82%b8%e3%83%a3%e3%83%a0%e3%83%95%e3%83%ac%e3%83%b3%e3%83%89%e3%82%af%e3%83%a9%e3%83%96%e6%9c%9d%e9%9c%9e%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5/",
       "title": "【9月13日 ジャムフレンドクラブ朝霞】スロパチ来店for埼玉！カバネリ海門決戦、リコリコが平均差枚数+4,800枚超え！メイン機種から好調箇所が続出していた！",
       "visitDate": "2026-09-13",
@@ -148410,6 +148110,99 @@
         }
       ],
       "fetchedAt": "2026-09-14T18:33:54.637Z"
+    },
+    {
+      "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%8813%e6%97%a5-%e4%b8%80%e7%95%aa%e8%88%98%e5%b7%9d%e8%b6%8a%e3%81%b5%e3%81%98%e3%81%bf%e9%87%8e%e5%ba%97%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97for%e5%9f%bc/",
+      "title": "【9月13日 一番舘川越ふじみ野店】スロパチ来店for埼玉！カバネリ海門決戦が平均差枚数+7,800枚と輝かしい結果に！至る所から抜群の出玉感が見られた！",
+      "visitDate": "2026-09-13",
+      "coverageType": "スロパチ来店for埼玉",
+      "store": {
+        "name": "一番舘川越ふじみ野店",
+        "prefecture": "埼玉県",
+        "city": "川越市"
+      },
+      "results": [
+        {
+          "category": "slot",
+          "machineKey": "name:カバネリ海門決戦",
+          "machineName": "カバネリ海門決戦",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 7800,
+          "unitNumbers": "1101〜1105"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロゴッドイーター",
+          "machineName": "スマスロゴッドイーター",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 6000
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:東京喰種",
+          "machineName": "東京喰種",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 5300,
+          "unitNumbers": "1113〜1117"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:乙女5",
+          "machineName": "乙女5",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 3000,
+          "unitNumbers": "861〜865"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:モンキー5",
+          "machineName": "モンキー5",
+          "units": 4,
+          "plusUnits": 2,
+          "avgDiff": 2400,
+          "unitNumbers": "65〜68"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ネオアイム",
+          "machineName": "ネオアイム",
+          "units": 4,
+          "plusUnits": 3,
+          "avgDiff": 1600,
+          "unitNumbers": "1037〜1051"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:マイジャグ5",
+          "machineName": "マイジャグ5",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 1300,
+          "unitNumbers": "705〜708"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:スマスロ化物語",
+          "machineName": "スマスロ化物語",
+          "units": 4,
+          "plusUnits": 1,
+          "avgDiff": 1200,
+          "unitNumbers": "165〜168"
+        },
+        {
+          "category": "slot",
+          "machineKey": "name:ウルミラ",
+          "machineName": "ウルミラ",
+          "units": 4,
+          "plusUnits": 4,
+          "avgDiff": 900
+        }
+      ],
+      "fetchedAt": "2026-09-15T23:31:57.347Z"
     },
     {
       "url": "https://777.slopachi-station.com/%e3%80%909%e6%9c%882%e6%97%a5-%e3%82%a8%e3%82%af%e3%82%b9%e3%83%bb%e3%82%a2%e3%83%aa%e3%83%bc%e3%83%8a-%e6%9d%be%e6%88%b8%e3%80%91%e3%82%b9%e3%83%ad%e3%83%91%e3%83%81%e6%9d%a5%e5%ba%97%e5%8f%96/",
