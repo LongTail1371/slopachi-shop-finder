@@ -6,7 +6,8 @@ import { MachineHero } from './components/MachineHero';
 import { Filters } from './components/Filters';
 import { ShopRow } from './components/ShopRow';
 import { StoreLookup } from './components/StoreLookup';
-import { availableFilters, filterShops, lookupStores } from './lib/rank';
+import { SortControl } from './components/SortControl';
+import { availableFilters, filterShops, lookupStores, sortShops } from './lib/rank';
 import { parseState, serializeState, type AppState } from './lib/urlState';
 import { formatDate } from './lib/format';
 
@@ -53,14 +54,19 @@ export function App() {
   const [query, setQuery] = useState('');
   const [openShop, setOpenShop] = useState<string | null>(null);
 
+  // 機種・種別・ビューが変わったら（戻る操作を含む）開いている行と検索語をリセットする
   useEffect(() => {
     setOpenShop(null);
+    setQuery('');
   }, [state.machineKey, state.category, state.view]);
 
   const machines = load.status === 'ready' ? load.data.machines : [];
   const machine = useMemo(() => machines.find((m) => m.machineKey === state.machineKey) ?? null, [machines, state.machineKey]);
   const options = useMemo(() => (machine ? availableFilters(machine) : { prefectures: [], coverageTypes: [] }), [machine]);
-  const shops = useMemo(() => (machine ? filterShops(machine, { prefectures: state.prefectures, coverageTypes: state.coverageTypes }) : []), [machine, state.prefectures, state.coverageTypes]);
+  const shops = useMemo(
+    () => (machine ? sortShops(filterShops(machine, { prefectures: state.prefectures, coverageTypes: state.coverageTypes }), state.sort) : []),
+    [machine, state.prefectures, state.coverageTypes, state.sort],
+  );
   const storeMatches = useMemo(() => lookupStores(machines, state.storeQuery, state.category), [machines, state.storeQuery, state.category]);
 
   const selectMachine = (machineKey: string) => {
@@ -73,7 +79,7 @@ export function App() {
       <header className="top">
         <h1>スロパチ取材 店さがし</h1>
         <nav className="top-nav" aria-label="表示">
-          <CategoryToggle value={state.category} onChange={(c) => { setQuery(''); setState({ ...state, category: c, machineKey: null, prefectures: [], coverageTypes: [] }); }} />
+          <CategoryToggle value={state.category} onChange={(c) => setState({ ...state, category: c, machineKey: null, prefectures: [], coverageTypes: [] })} />
           {state.view === 'machine'
             ? <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'store' }, 'push')}>店舗から探す</button>
             : <button type="button" className="linklike" onClick={() => setState({ ...state, view: 'machine', storeQuery: '' }, 'push')}>機種から探す</button>}
@@ -89,7 +95,7 @@ export function App() {
 
       {load.status === 'ready' && state.view === 'machine' && (
         <>
-          <MachineSearch machines={machines} category={state.category} query={query} onQueryChange={setQuery} onSelect={selectMachine} windowDays={load.data.windowDays} />
+          <MachineSearch key={state.machineKey ?? ''} machines={machines} category={state.category} query={query} onQueryChange={setQuery} onSelect={selectMachine} windowDays={load.data.windowDays} selected={machine !== null} />
           {state.machineKey && !machine && (
             <p className="empty">この機種は直近{load.data.windowDays}日の取材に載っていません。別の機種を選んでください。</p>
           )}
@@ -98,6 +104,12 @@ export function App() {
               <MachineHero machine={machine} windowDays={load.data.windowDays} />
               <Filters options={options} value={{ prefectures: state.prefectures, coverageTypes: state.coverageTypes }}
                        onChange={(v) => setState({ ...state, prefectures: v.prefectures, coverageTypes: v.coverageTypes })} />
+              <div className="list-head">
+                <SortControl value={state.sort} category={machine.category} onChange={(k) => setState({ ...state, sort: k })} />
+                <p className="legend" aria-hidden="false">
+                  <i className="seg plus" /> プラス <i className="seg minus" /> マイナス <i className="seg none" /> 平均の記載なし。左が古く右が新しい
+                </p>
+              </div>
               {shops.length === 0
                 ? <p className="empty">この条件に合う店舗はありません。絞り込みを外してください。</p>
                 : (

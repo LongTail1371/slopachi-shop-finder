@@ -35,6 +35,13 @@ describe('ShopRow', () => {
     expect(segs[2]).toHaveClass('plus');   // 9/13 +13700
   });
 
+  it('各セグメントに日付と差玉の読み上げラベルが付く', () => {
+    render(<ul><ShopRow shop={shop} category="pachinko" open={false} onToggle={() => {}} /></ul>);
+    const segs = screen.getByRole('listitem').querySelectorAll('.seg');
+    expect(segs[0]).toHaveAttribute('aria-label', '8/30 +2,000玉');
+    expect(segs[1]).toHaveAttribute('aria-label', '9/6 -1,830玉');
+  });
+
   it('平均が 0 のときは色クラスを付けない（中立表示）', () => {
     const neutralShop: ShopHit = { ...shop, avgDiffMean: 0 };
     render(<ul><ShopRow shop={neutralShop} category="pachinko" open={false} onToggle={() => {}} /></ul>);

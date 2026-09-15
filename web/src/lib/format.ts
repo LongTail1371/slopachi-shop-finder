@@ -23,3 +23,7 @@ export function formatDate(iso: string): string {
   const [y, m, d] = iso.split('-');
   return `${y}年${Number(m)}月${Number(d)}日`;
 }
+
+export function formatHits(hitCount: number, shopCount: number): string {
+  return `取材${hitCount}件・${shopCount}店舗`;
+}

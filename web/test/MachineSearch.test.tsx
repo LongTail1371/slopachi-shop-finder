@@ -33,4 +33,22 @@ describe('MachineSearch', () => {
     render(<MachineSearch machines={machines} category="pachinko" query="存在しない" onQueryChange={() => {}} onSelect={() => {}} windowDays={30} />);
     expect(screen.getByText('この名前の機種は直近30日の取材に載っていません。別の表記で試してください。')).toBeInTheDocument();
   });
+
+  it('候補行は機種名と、取材件数・店舗数を別々に出す', () => {
+    render(<MachineSearch machines={machines} category="pachinko" query="" onQueryChange={() => {}} onSelect={() => {}} windowDays={90} />);
+    expect(screen.getByText('取材9件・1店舗')).toBeInTheDocument();
+  });
+
+  it('機種を選択中で空入力なら候補を隠し、「上位20機種を見る」で開く', async () => {
+    render(<MachineSearch machines={machines} category="pachinko" query="" onQueryChange={() => {}} onSelect={() => {}} windowDays={90} selected />);
+    expect(screen.queryAllByRole('option')).toHaveLength(0);
+    expect(screen.getByText('別の機種を探すには名前を入力')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: '上位20機種を見る' }));
+    expect(screen.getAllByRole('option')).toHaveLength(2);
+  });
+
+  it('機種を選択中でも入力があれば候補を出す', () => {
+    render(<MachineSearch machines={machines} category="pachinko" query="番長" onQueryChange={() => {}} onSelect={() => {}} windowDays={90} selected />);
+    expect(screen.getAllByRole('option')).toHaveLength(1);
+  });
 });

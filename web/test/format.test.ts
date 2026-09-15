@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDiff, formatRate, formatShortDate, formatDate } from '../src/lib/format';
+import { formatDiff, formatRate, formatShortDate, formatDate, formatHits } from '../src/lib/format';
 
 describe('format', () => {
   it('差玉・差枚', () => {
@@ -12,5 +12,8 @@ describe('format', () => {
     expect(formatRate(0.667)).toBe('67%');
     expect(formatShortDate('2026-09-13')).toBe('9/13');
     expect(formatDate('2026-09-13')).toBe('2026年9月13日');
+  });
+  it('取材件数と店舗数', () => {
+    expect(formatHits(163, 40)).toBe('取材163件・40店舗');
   });
 });

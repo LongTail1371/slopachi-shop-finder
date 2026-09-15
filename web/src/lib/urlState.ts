@@ -1,4 +1,5 @@
 import type { Category } from '../../../shared/types';
+import { SORT_KEYS, type SortKey } from './rank';
 
 export interface AppState {
   view: 'machine' | 'store';
@@ -7,6 +8,7 @@ export interface AppState {
   prefectures: string[];
   coverageTypes: string[];
   storeQuery: string;
+  sort: SortKey;
 }
 
 export const DEFAULT_STATE: AppState = {
@@ -16,6 +18,7 @@ export const DEFAULT_STATE: AppState = {
   prefectures: [],
   coverageTypes: [],
   storeQuery: '',
+  sort: 'count',
 };
 
 function list(v: string | null): string[] {
@@ -26,6 +29,7 @@ export function parseState(search: string): AppState {
   const q = new URLSearchParams(search.startsWith('?') ? search.slice(1) : search);
   const v = q.get('v');
   const c = q.get('c');
+  const s = q.get('s');
   return {
     view: v === 'store' ? 'store' : 'machine',
     category: c === 'slot' ? 'slot' : 'pachinko',
@@ -33,6 +37,7 @@ export function parseState(search: string): AppState {
     prefectures: list(q.get('pref')),
     coverageTypes: list(q.get('type')),
     storeQuery: q.get('shop') ?? '',
+    sort: (SORT_KEYS as readonly string[]).includes(s ?? '') ? (s as SortKey) : 'count',
   };
 }
 
@@ -44,6 +49,7 @@ export function serializeState(s: AppState): string {
   if (s.prefectures.length) q.set('pref', s.prefectures.join(','));
   if (s.coverageTypes.length) q.set('type', s.coverageTypes.join(','));
   if (s.storeQuery) q.set('shop', s.storeQuery);
+  if (s.sort !== DEFAULT_STATE.sort) q.set('s', s.sort);
   const str = q.toString();
   return str ? `?${str}` : '';
 }

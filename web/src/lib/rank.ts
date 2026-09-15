@@ -41,27 +41,58 @@ function compareShops(x: ShopHit, y: ShopHit): number {
   );
 }
 
+/** 絞り込みだけを行う。順序は sortShops が決める */
 export function filterShops(machine: MachineSummary, f: ShopFilter): ShopHit[] {
   const byPref = f.prefectures.length ? machine.shops.filter((s) => f.prefectures.includes(s.prefecture)) : machine.shops;
-  if (f.coverageTypes.length === 0) return [...byPref].sort(compareShops);
+  if (f.coverageTypes.length === 0) return byPref;
   return byPref
     .map((s) => ({ s, arts: s.articles.filter((a) => f.coverageTypes.includes(a.coverageType)) }))
     .filter(({ arts }) => arts.length > 0)
-    .map(({ s, arts }) => rebuildShop(s, arts))
-    .sort(compareShops);
+    .map(({ s, arts }) => rebuildShop(s, arts));
 }
 
-function countDesc(items: string[]): string[] {
+export interface FilterOption { value: string; count: number }
+
+function countDesc(items: string[]): FilterOption[] {
   const counts = new Map<string, number>();
   for (const it of items) counts.set(it, (counts.get(it) ?? 0) + 1);
-  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ja')).map(([k]) => k);
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ja'))
+    .map(([value, count]) => ({ value, count }));
 }
 
-export function availableFilters(machine: MachineSummary): { prefectures: string[]; coverageTypes: string[] } {
+export function availableFilters(machine: MachineSummary): { prefectures: FilterOption[]; coverageTypes: FilterOption[] } {
   return {
     prefectures: countDesc(machine.shops.flatMap((s) => s.articles.map(() => s.prefecture))),
     coverageTypes: countDesc(machine.shops.flatMap((s) => s.articles.map((a) => a.coverageType))),
   };
+}
+
+export const SORT_KEYS = ['count', 'avg', 'plusRate', 'recent'] as const;
+export type SortKey = (typeof SORT_KEYS)[number];
+
+function compareByKey(key: SortKey): (x: ShopHit, y: ShopHit) => number {
+  switch (key) {
+    case 'count':
+      return compareShops;
+    case 'avg':
+      // 平均の記載が無い店舗は末尾に置く
+      return (x, y) => {
+        if (x.avgDiffMean === null || y.avgDiffMean === null) {
+          if (x.avgDiffMean === y.avgDiffMean) return compareShops(x, y);
+          return x.avgDiffMean === null ? 1 : -1;
+        }
+        return y.avgDiffMean - x.avgDiffMean || compareShops(x, y);
+      };
+    case 'plusRate':
+      return (x, y) => y.plusRate - x.plusRate || compareShops(x, y);
+    case 'recent':
+      return (x, y) => (x.lastVisitDate < y.lastVisitDate ? 1 : x.lastVisitDate > y.lastVisitDate ? -1 : 0) || compareShops(x, y);
+  }
+}
+
+export function sortShops(shops: ShopHit[], key: SortKey): ShopHit[] {
+  return [...shops].sort(compareByKey(key));
 }
 
 export interface StoreMatch {

@@ -16,9 +16,10 @@ export function ShopRow({ shop, category, open, onToggle }: Props) {
         </span>
         <span className="shop-stats">
           <span className="segs" aria-label={`取材${shop.hitCount}件のうちプラス${chronological.filter((a) => a.avgDiff !== null && a.avgDiff > 0).length}件`}>
-            {chronological.map((a) => (
-              <i key={a.url} className={`seg ${a.avgDiff === null ? 'none' : a.avgDiff > 0 ? 'plus' : 'minus'}`} title={`${formatShortDate(a.visitDate)} ${formatDiff(a.avgDiff, category)}`} />
-            ))}
+            {chronological.map((a) => {
+              const label = `${formatShortDate(a.visitDate)} ${formatDiff(a.avgDiff, category)}`;
+              return <i key={a.url} role="img" className={`seg ${a.avgDiff === null ? 'none' : a.avgDiff > 0 ? 'plus' : 'minus'}`} aria-label={label} title={label} />;
+            })}
           </span>
           <span className="stat"><span className="stat-label">平均</span><span className={shop.avgDiffMean !== null && shop.avgDiffMean > 0 ? 'plus' : shop.avgDiffMean !== null && shop.avgDiffMean < 0 ? 'minus' : ''}>{formatDiff(shop.avgDiffMean, category)}</span></span>
           <span className="stat"><span className="stat-label">プラス台</span><span>{formatRate(shop.plusRate)}</span></span>

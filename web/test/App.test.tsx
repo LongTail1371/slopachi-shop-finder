@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { MachinesFile } from '../../shared/types';
 import { App } from '../src/App';
@@ -52,7 +52,7 @@ describe('App', () => {
     window.history.replaceState(null, '', '/?m=dmm%3A1');
     render(<App />);
     await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
-    await userEvent.click(screen.getByRole('checkbox', { name: '千葉県' }));
+    await userEvent.click(within(screen.getByRole('group', { name: '都道府県' })).getByRole('button', { name: /千葉県/ }));
     expect(screen.getAllByRole('listitem')).toHaveLength(1);
     expect(screen.getByText('B店')).toBeInTheDocument();
     expect(window.location.search).toContain('pref=');
@@ -115,7 +115,7 @@ describe('App', () => {
     render(<App />);
     await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
     const pushSpy = vi.spyOn(window.history, 'pushState');
-    await userEvent.click(screen.getByRole('checkbox', { name: '千葉県' }));
+    await userEvent.click(within(screen.getByRole('group', { name: '都道府県' })).getByRole('button', { name: /千葉県/ }));
     expect(screen.getAllByRole('listitem')).toHaveLength(1);
     expect(pushSpy).not.toHaveBeenCalled();
   });
@@ -125,5 +125,47 @@ describe('App', () => {
     render(<App />);
     await waitFor(() => expect(screen.getByText(/2026年9月15日/)).toBeInTheDocument());
     expect(screen.getByRole('link', { name: 'スロパチステーション' })).toHaveAttribute('href', 'https://777.slopachi-station.com/');
+  });
+
+  it('機種を選ぶと候補一覧が消え、看板が検索欄の直下に来る', async () => {
+    mockFetch();
+    render(<App />);
+    await userEvent.click(await screen.findByRole('option', { name: /真・北斗無双 第5章/ }));
+    expect(screen.getByRole('heading', { level: 2, name: '真・北斗無双 第5章' })).toBeInTheDocument();
+    expect(screen.queryAllByRole('option')).toHaveLength(0);
+  });
+
+  it('並び替えを平均差玉にすると順序と URL が変わる', async () => {
+    mockFetch();
+    window.history.replaceState(null, '', '/?m=dmm%3A1');
+    render(<App />);
+    await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
+    expect(screen.getAllByRole('listitem')[0]).toHaveTextContent('B店'); // 同回数なら直近が新しい B が先
+    await userEvent.click(screen.getByRole('radio', { name: '平均差玉' }));
+    expect(screen.getAllByRole('listitem')[0]).toHaveTextContent('A店');
+    expect(window.location.search).toContain('s=avg');
+  });
+
+  it('店舗一覧の上にセグメント列の凡例を出す', async () => {
+    mockFetch();
+    window.history.replaceState(null, '', '/?m=dmm%3A1');
+    render(<App />);
+    await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
+    expect(screen.getByText(/左が古く右が新しい/)).toBeInTheDocument();
+  });
+
+  it('入力途中で戻ると検索語もリセットされ、上位一覧に戻る', async () => {
+    mockFetch();
+    window.history.replaceState(null, '', '/?m=dmm%3A1');
+    render(<App />);
+    await screen.findByRole('heading', { level: 2, name: '真・北斗無双 第5章' });
+    await userEvent.type(screen.getByLabelText('機種名で探す'), '存在しない');
+    expect(screen.getByText(/この名前の機種は/)).toBeInTheDocument();
+
+    window.history.pushState(null, '', '/');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+
+    expect(await screen.findByRole('option', { name: /真・北斗無双 第5章/ })).toBeInTheDocument();
+    expect(screen.getByLabelText('機種名で探す')).toHaveValue('');
   });
 });

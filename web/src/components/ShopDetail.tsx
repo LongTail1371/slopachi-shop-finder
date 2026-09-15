@@ -3,6 +3,7 @@ import { formatDate, formatDiff } from '../lib/format';
 
 export function ShopDetail({ shop, category }: { shop: ShopHit; category: Category }) {
   return (
+    <div className="detail-wrap">
     <table className="detail">
       <thead>
         <tr><th>訪問日</th><th>取材</th><th>台数</th><th>プラス台</th><th>平均</th><th></th></tr>
@@ -20,5 +21,6 @@ export function ShopDetail({ shop, category }: { shop: ShopHit; category: Catego
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
